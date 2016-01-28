@@ -1,9 +1,9 @@
 # Cli-wrapper 
 ##A small project to automate CLI based tasks
 
-Because we thing CLI is here to stay, at least for troubleshooting purposes
-Because we use it on a daily basis
-Because we were tired of reinventing the wheel...
+>_Because we thing CLI is here to stay, at least for troubleshooting purposes_  
+>_Because we use it on a daily basis_  
+>_Because we were tired of reinventing the wheel..._  
 
 We decided to build this small project using Python and the [pexpect](https://pexpect.readthedocs.org/en/stable/) module. 
 
