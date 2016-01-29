@@ -7,6 +7,8 @@
 
 We decided to build this small project using Python and the [pexpect](https://pexpect.readthedocs.org/en/stable/) module. 
 
+>Until now, this is just work in progress, first release planned by February 2016.  
+
 ##Features we must have
 - automation of connection and authentication phases in a secure way
 - provide a list of hosts from which we need the same pieces of infos
