@@ -1,0 +1,12 @@
+# each and
+# every line starting with a pound is ignored
+#
+# here below a sample list of commands
+#
+# display hardware and software versions of a Cisco device
+show version
+# 
+show ntp status
+show ntp association
+#
+#

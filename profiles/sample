@@ -1,0 +1,14 @@
+#here below the credentials, one field per line
+#you don't need to take care of spaces in this file
+#the only important thing is : "one field per line"
+# 
+--username-credentials
+  myLoginAccount
+  mySecretPassword
+  theSupaSecretEnablePassword
+#
+#and redefinition of prompt for example
+#still one field per line
+#
+--prompt
+  '\n[^\n]+[>#](\s|)$'

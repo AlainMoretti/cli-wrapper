@@ -1,0 +1,8 @@
+This is a plain text file
+
+Its purpose is to show how you can encrypt/decrypt files
+containing embedded passwords and other critical stuff
+using "cipher.py" utility. 
+
+Its ciphered counterpart "plaintext.enc" password is "password"
+So you can test the decrypt function of "cipher.py" as well...
