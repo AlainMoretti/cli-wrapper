@@ -113,7 +113,7 @@ if not args.user:p.error('You need at least to specifiy the username you will be
 
 # here below, we try to get a host list from user arguments so we can iterate over this afterwards
 if args.remote:
-    listhosts = [args.remote]
+    listhosts_cleaned = [args.remote]
 elif args.array:
     try:
        f = open(args.array)
