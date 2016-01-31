@@ -27,6 +27,8 @@ from libs.connection import CleanComments
 from libs.cryptolib import decrypt_file_to_array
 from libs.getpass import getpass
 
+LOGDIR = 'logs'
+
 p = argparse.ArgumentParser(
    usage='''
    %(prog)s -r "remote host"| -f "list of hosts" [options]
@@ -201,7 +203,10 @@ for host in listhosts_cleaned:
     
     #create a random name for logfile if asked to do so
     if args.logfile:
-        logfile = 'logs/'+h+'_'+('%12x' % random.randrange(16**12)).upper()+'.log'
+        if not os.path.isdir(LOGDIR):
+            print('create a folder '+LOGDIR+' to store logging files')
+            os.makedirs(LOGDIR) 
+        logfile = LOGDIR+'/'+h+'_'+('%12x' % random.randrange(16**12)).upper()+'.log'
         try:
            fout = open(logfile,'wb')
            c.logfile_read = fout
