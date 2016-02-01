@@ -20,14 +20,17 @@ import random
 import os
 import hashlib
 
+from libs.connection import BuildCommand
+from libs.connection import CleanComments
 from libs.connection import Connection
 from libs.connection import Login
 from libs.connection import SendPassword
-from libs.connection import CleanComments
 from libs.cryptolib import decrypt_file_to_array
 from libs.getpass import getpass
 
+#environment variables - you can change it without breaking anything...
 LOGDIR = 'logs'
+#do not change anything below this line...
 
 p = argparse.ArgumentParser(
    usage='''
@@ -59,8 +62,8 @@ mut_excl_2.add_argument('-cf', '--command-file', action='store',type=str, dest='
 
 p.add_argument('-d', '--debug', action='store_true',dest='debug', help='debug mode will out in cear all arguments passed to the script')
 p.add_argument('-i', '--interact', action='store_false',dest='interact', help='do not interact after connection')
-p.add_argument('-j', '--jumphost-credentials', action='store',type=str, dest='jumphost', nargs='+',
-    help='jumphost name and optionally an ordered list: (protocol, port number, login, password, prompt)')
+p.add_argument('-j', '--jumphost-credentials', action='store',type=str, dest='jumphost', metavar='LIST', nargs='+',
+    help='an ordered list: (protocol,host,port,username,password,prompt,timeout,verbose)\nyou can omit latest elements')
 p.add_argument('-l', '--logfile', action='store_true', dest='logfile', help='create a logging file in "logs" subdirectory')
 p.add_argument('-m', '--no-more', action='store',type=str, dest='more', 
     help='command to pass to remote host to avoid --more-- in execution')
@@ -148,9 +151,6 @@ if args.debug and (args.cmdfile or args.cmd):
     print('List of commands:')
     pprint.pprint(listcmd_cleaned)   
     
-#allow all messages to be sent back to terminal in verbose mode
-if args.verbose:args.initlogfile = sys.stdout
-
 # empty default port number if telnet without port options
 if args.proto == 'telnet' and not args.port:args.port = ''
 
@@ -175,8 +175,8 @@ if args.jumphost:
     try:args.jumphost[4]
     except:args.jumphost.append('')
     try:args.jumphost[5]
-    except:args.jumphost.append('\$\s?$')
-    c = Connection(args.proto,args.jumphost,args.timeout,args.verbose)
+    except:args.jumphost.append('')
+    c = Connection(*(args.jumphost+[args.timeout]+[args.verbose]))
     if c == False:exit('Cannot connect to jumphost') 
     
 #import sub procedure
@@ -199,6 +199,8 @@ for host in listhosts_cleaned:
             print('Cannot connect to remote host: '+h)
             continue
     else:
+        cmd = BuildCommand(args.proto,h,args.port,username[0])
+        c.sendline(cmd)
         l = Login(c,args.proto,h,args.port,username[0],username[1],
             args.prompt,args.timeout,args.verbose
         )
@@ -252,6 +254,7 @@ for host in listhosts_cleaned:
     else:
         if not args.jumphost:c.close(force=True)
         else:
-            c.sendline(exit)
+            c.sendline('exit')
+            c.sendline()
             c.expect(args.jumphost[5])
         print('\n<<< gracefully exited from: '+h+'\n')

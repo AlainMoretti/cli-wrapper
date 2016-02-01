@@ -11,7 +11,8 @@ We decided to build this small project using Python and the [pexpect](https://pe
 - grab the package from Github
 - install it anywhere on your machine
 - read "requirements.txt" for a list of Python modules required by the application
-- you can use "pip install -r requirements.txt" but PyCrypto install will fail (see known problems below)
+  you can use "pip install -r requirements.txt" but PyCrypto install will fail (see known problems below)
+- you need bash shell accessible from the command line "bash"
 
 ##Howto use ?
 - simply execute "cli.py --help" from command line, and follow the guidelines
@@ -41,6 +42,8 @@ We decided to build this small project using Python and the [pexpect](https://pe
 
 ##Known problems
 >- there is a bug with PyCrypto install, more details on the [problem](https://github.com/dlitz/pycrypto/issues/108) and a [workaround solution](https://github.com/tootedom/related/blob/master/provisioning/ansible-playground/README.md)
+>- sometimes the encrypted profile provided to the "-o" option requires an empty line at the end, 
+>  you can figure that out with debug option "-d", and check if the last parameter is not missing.  
 
 ##Rewards
 - Pexpect and Pcrypto authors and developers

@@ -15,11 +15,40 @@
 import pexpect
 import sys
 
-def Connection(protocol,host,port,username,password,prompt,timeout,verbose):
+#environment variables - you can change it without breaking anything...
+SSH_BINARY = '/usr/bin/ssh'
+TELNET_BINARY = 'telnet'
+#do not change anything below this line...
+
+def BuildCommand(protocol,host,port,username):
+    res = False
     if protocol == 'ssh':
-       cmd = 'ssh -p '+str(port)+' -l '+username+' '+host
+       cmd = SSH_BINARY+' -p '+str(port)+' -l '+username+' '+host
+       res = True
     elif protocol == 'telnet':
-       cmd = 'telnet '+host+' '+port
+       cmd = TELNET_BINARY+' '+host+' '+port
+       res = True
+    if res: return cmd
+    else: return False
+
+def CleanComments(array):
+    cleaning = False
+    for i, item in enumerate(array):
+        if item[0] == '#':
+            array[i] = ''
+            cleaning = True
+    array = [x.strip(' ') for x in array]
+    remove = True
+    while remove:
+        try:
+            array.remove('')
+        except:remove = False
+    return array
+
+def Connection(protocol,host,port,username,password,prompt,timeout,verbose):
+    try:cmd = BuildCommand(protocol, host, port, username)
+    except ValueError as e:exit(e)
+    
     p = pexpect.spawn('bash',['-c', cmd],timeout=timeout)
     if verbose is True:p.logfile_read = sys.stderr 
     if Login(p,protocol,host,port,username,password,prompt,timeout,verbose):
@@ -32,8 +61,8 @@ def Login(p,protocol,host,port,username,password,prompt,timeout,verbose):
     index = p.expect([
         prompt,
         "Are you sure you want to continue",
-        '((u|U)sername|(l|L)ogin):',
-        '(p|P)assword:',
+        '((u|U)sername|(l|L)ogin):\s?$',
+        '(p|P)assword:\s?$',
         pexpect.TIMEOUT,
         pexpect.EOF
     ])
@@ -82,17 +111,3 @@ def SendPassword(password,prompt,connection,timeout):
         print('\nremote host unexpectedly closed the connection when sending password...')
         res = False
     return res
-
-def CleanComments(array):
-    cleaning = False
-    for i, item in enumerate(array):
-        if item[0] == '#':
-            array[i] = ''
-            cleaning = True
-    array = [x.strip(' ') for x in array]
-    remove = True
-    while remove:
-        try:
-            array.remove('')
-        except:remove = False
-    return array
