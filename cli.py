@@ -63,8 +63,8 @@ p.add_argument('-i', '--interact', action='store_false',dest='interact', help='d
 p.add_argument('-j', '--jumphost-credentials', action='store',type=str, dest='jumphost', metavar='LIST', nargs='+',
     help='an ordered list: (protocol,host,port,username,password,prompt,timeout,verbose)\nyou can omit latest elements')
 p.add_argument('-l', '--logfile', action='store_true', dest='logfile', help='create a logging file in "logs" subdirectory')
-p.add_argument('-m', '--no-more', action='store',type=str, dest='more', default="terminal length 0",
-    help='command to pass to remote host to avoid --more-- in execution')
+p.add_argument('-m', '--no-more', action='store',type=str, dest='more',
+    help='command to pass to remote host to avoid --more-- in execution, defaults to "terminal length 0"')
 p.add_argument('-o', '--options-override', action='store',type=str, dest='override', 
     help='ciphered file containing arguments that override command line options')
 p.add_argument('-p', '--prompt', action='store',type=str, dest='prompt', help='expected prompt from remote host')
@@ -72,14 +72,18 @@ p.add_argument('-po', '--port-number', action='store',type=str, dest='port', met
 p.add_argument('-s', '--sub-proc', action='store',type=str, dest='sub', nargs=2, metavar=('MODULE','METHOD'),
     help='module and function to execute')
 p.add_argument('-t', '--timeout', action='store',type=int, dest='timeout', help='max seconds to wait for an answer from remote host')
-p.add_argument('-u', '--username-credentials', action='store',type=str, dest='user', nargs='+', metavar=('USERNAME'),
-    help='username and optionally an ordered list: (password, enable password)')
+p.add_argument('-u', '--username-credentials', action='store',type=str, dest='user', metavar=('USERNAME'),
+    help='username to log into remote host')
 p.add_argument('-v', '--verbose', action='store_true', dest='verbose', help='unhide connection process, usefull for debugging')
-p.add_argument('-x', '--protocol', action='store',type=str, dest='proto', choices=['telnet','ssh'], help='protocol to be used for connection')
+p.add_argument('-w', '--password', action='store',type=str, dest='password', nargs='+', metavar=('PASSWORD'),
+    help='password to log into remote host and optionally an enable password')
+p.add_argument('-x', '--protocol', action='store',type=str, dest='proto', choices=['telnet','ssh'], 
+    help='protocol to be used for connection, defaults to ssh')
 
 p.set_defaults(          
    interact=True,
    logfile=False,
+   more='terminal length 0',
    prompt='\n[^\n]+[>#](\s|)$',
    verbose=False,
    timeout='15',
@@ -150,13 +154,11 @@ if args.debug and (args.cmdfile or args.cmd):
 # empty default port number if telnet without port options
 if args.proto == 'telnet' and not args.port:args.port = ''
 
-# complete user credentials array with empty strings
-if args.user:
-    username = args.user
-    try:username[1] = args.user[1]
-    except:username.append('')
-    try:username[2] = args.user[2]
-    except:username.append('')
+# complete password array with empty strings
+if args.password:
+    password = args.password[0]
+    try:enablepassword = args.password[1]
+    except:args.password.append('')
 
 # complete jumphost credentials array with empty strings and initiate connection
 if args.jumphost:
@@ -188,16 +190,16 @@ for host in listhosts_cleaned:
     h = host.rstrip('\n')
     if not args.jumphost:
         c = Connection(
-            args.proto,h,args.port,username[0],username[1],
+            args.proto,h,args.port,args.user,password,
             args.prompt,args.timeout,args.verbose
         )
         if c == False:
             print('Cannot connect to remote host: '+h)
             continue
     else:
-        cmd = BuildCommand(args.proto,h,args.port,username[0])
+        cmd = BuildCommand(args.proto,h,args.port,args.user)
         c.sendline(cmd)
-        l = Login(c,args.proto,h,args.port,username[0],username[1],
+        l = Login(c,args.proto,h,args.port,args.user,password,
             args.prompt,args.timeout,args.verbose
         )
         if l == False:
@@ -205,10 +207,10 @@ for host in listhosts_cleaned:
             continue
     
     #now switch to enable mode if needed       
-    if len(username[2]) > 0:
+    if len(args.password[1]) > 0:
         c.sendline('enable')
         c.expect('assword:')
-        if SendPassword(username[2],args.prompt,c,args.timeout):
+        if SendPassword(enablepassword,args.prompt,c,args.timeout):
             print("\n>>> connected to: "+h)
     
     #create a random name for logfile if asked to do so

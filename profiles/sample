@@ -4,11 +4,7 @@
 # 
 --username-credentials
   myLoginAccount
+--password
   mySecretPassword
   theSupaSecretEnablePassword
 #
-#and redefinition of prompt for example
-#still one field per line
-#
---prompt
-  '\n[^\n]+[>#](\s|)$'
