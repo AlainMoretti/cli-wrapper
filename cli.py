@@ -208,7 +208,7 @@ for host in listhosts_cleaned:
     
     #now switch to enable mode if needed       
     if len(username[2]) > 0:
-        c.sendline(enable)
+        c.sendline('enable')
         c.expect('assword:')
         if SendPassword(username[2],args.prompt,c,args.timeout):
             print("\n>>> connected to: "+h)
