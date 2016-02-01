@@ -68,6 +68,8 @@ p.add_argument('-o', '--options-override', action='store',type=str, dest='overri
     help='ciphered file containing arguments that override command line options')
 p.add_argument('-p', '--prompt', action='store',type=str, dest='prompt', help='expected prompt from remote host')
 p.add_argument('-po', '--port-number', action='store',type=str, dest='port', metavar='TCP_PORT_NUMBER', help='TCP port number for connection')
+p.add_argument('-s', '--sub-proc', action='store',type=str, dest='sub', nargs=2, metavar=('MODULE','METHOD'),
+    help='module and function to execute')
 p.add_argument('-t', '--timeout', action='store',type=int, dest='timeout', help='max seconds to wait for an answer from remote host')
 p.add_argument('-u', '--username-credentials', action='store',type=str, dest='user', nargs='+', metavar=('USERNAME'),
     help='username and optionally an ordered list: (password, enable password)')
@@ -98,8 +100,10 @@ if args.override:
        key = hashlib.sha256(password).digest()
        args_override = decrypt_file_to_array(key,args.override)
        args_override_cleaned = CleanComments(args_override)
+       if len(args_override_cleaned) == 0:
+           exit('ERROR: wrong password, or file was empty...')
        #and now merge arguments in initial namespace
-       p.parse_args(args_override_cleaned, namespace=args)
+       else:p.parse_args(args_override_cleaned, namespace=args)
 
 #if debug mode is on, we start with araw output of args
 if args.debug:
@@ -173,7 +177,15 @@ if args.jumphost:
     try:args.jumphost[5]
     except:args.jumphost[5] = '\$\s?$'
     c = Connection(args.proto,args.jumphost,args.timeout,args.verbose)
-    if c == False:exit('Cannot connect to jumphost')   
+    if c == False:exit('Cannot connect to jumphost') 
+    
+#import sub procedure
+if args.sub:
+    import importlib
+    try:
+        mod = importlib.import_module(args.sub[0])
+        submethod = getattr(mod, args.sub[1])  
+    except ImportError as e:exit(e)
 
 # main loop through hosts
 for host in listhosts_cleaned:
@@ -225,6 +237,11 @@ for host in listhosts_cleaned:
         for line in listcmd_cleaned:
             c.sendline(line)
             c.expect(args.prompt)
+            
+    #execute sub method
+    if args.sub:
+        try:submethod(c,args.prompt)
+        except (ImportError,AttributeError,NameError) as e:exit(e)
     
     # pass in interact mode, hit ^F to end connection
     if args.interact is True:
