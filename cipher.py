@@ -14,13 +14,14 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from libs.cryptolib import encrypt_file
-from libs.cryptolib import decrypt_file
-from libs.getpass import getpass
-
 import hashlib
 import os.path
 import re
+
+from libs import constants
+from libs.cryptolib import encrypt_file
+from libs.cryptolib import decrypt_file
+
 
 askedaction = raw_input('What do you wanna do ? decrypt/encrypt - [D/e]: ')
 if (re.match('^(?i)d(ecrypt|)$',askedaction) or not askedaction): action = 'decrypt'

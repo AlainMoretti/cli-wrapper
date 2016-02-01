@@ -12,10 +12,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from Crypto.Cipher import AES
 import random
 import os
 import struct
+
+from Crypto.Cipher import AES
 
 def encrypt_file(key, in_filename, out_filename=None, chunksize=64*1024):
     """ Encrypts a file using AES (CBC mode) with the

@@ -15,18 +15,16 @@
 import pexpect
 import sys
 
-#environment variables - you can change it without breaking anything...
-SSH_BINARY = '/usr/bin/ssh'
-TELNET_BINARY = 'telnet'
-#do not change anything below this line...
+from libs import constants
+
 
 def BuildCommand(protocol,host,port,username):
     res = False
     if protocol == 'ssh':
-       cmd = SSH_BINARY+' -p '+str(port)+' -l '+username+' '+host
+       cmd = constants.SSH_BINARY+' -p '+str(port)+' -l '+username+' '+host
        res = True
     elif protocol == 'telnet':
-       cmd = TELNET_BINARY+' '+host+' '+port
+       cmd = constants.TELNET_BINARY+' '+host+' '+port
        res = True
     if res: return cmd
     else: return False
@@ -49,7 +47,7 @@ def Connection(protocol,host,port,username,password,prompt,timeout,verbose):
     try:cmd = BuildCommand(protocol, host, port, username)
     except ValueError as e:exit(e)
     
-    p = pexpect.spawn('bash',['-c', cmd],timeout=timeout)
+    p = pexpect.spawn(constants.DEFAULT_SHELL,['-c', cmd],timeout=timeout)
     if verbose is True:p.logfile_read = sys.stderr 
     if Login(p,protocol,host,port,username,password,prompt,timeout,verbose):
         return p

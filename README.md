@@ -12,7 +12,7 @@ We decided to build this small project using Python and the [pexpect](https://pe
 - install it anywhere on your machine
 - read "requirements.txt" for a list of Python modules required by the application
   you can use "pip install -r requirements.txt" but PyCrypto install will fail (see known problems below)
-- you need bash shell accessible from the command line "bash"
+- modify environment variables stored in "libs/constants.py" if needed
 
 ##Howto use ?
 - simply execute "cli.py --help" from command line, and follow the guidelines
