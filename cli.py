@@ -165,17 +165,17 @@ if args.user:
 # complete jumphost credentials array with empty strings and initiate connection
 if args.jumphost:
     try:args.jumphost[1]
-    except:args.jumphost[1] = 'ssh'
+    except:args.jumphost.append('ssh')
     try:args.jumphost[2]
     except:
-        if args.jumphost[1] == 'ssh':args.jumphost[2] = '22'
-        elif args.jumphost[1] == 'telnet':args.jumphost[2] = ''
+        if args.jumphost[1] == 'ssh':args.jumphost.append('22')
+        elif args.jumphost[1] == 'telnet':args.jumphost.append('')
     try:args.jumphost[3]
-    except:args.jumphost[3] = ''
+    except:args.jumphost.append('')
     try:args.jumphost[4]
-    except:args.jumphost[4] = ''
+    except:args.jumphost.append('')
     try:args.jumphost[5]
-    except:args.jumphost[5] = '\$\s?$'
+    except:args.jumphost.append('\$\s?$')
     c = Connection(args.proto,args.jumphost,args.timeout,args.verbose)
     if c == False:exit('Cannot connect to jumphost') 
     
