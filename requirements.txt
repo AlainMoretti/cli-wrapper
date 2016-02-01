@@ -1,4 +1,4 @@
-pycrypto
 pexpect
 argparse
 getch
+pycrypto

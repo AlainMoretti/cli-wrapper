@@ -11,6 +11,7 @@ We decided to build this small project using Python and the [pexpect](https://pe
 - grab the package from Github
 - install it anywhere on your machine
 - read "requirements.txt" for a list of Python modules required by the application
+- you can use "pip install -r requirements.txt" but PyCrypto install will fail (see known problems below)
 
 ##Howto use ?
 - simply execute "cli.py --help" from command line, and follow the guidelines
@@ -37,6 +38,9 @@ We decided to build this small project using Python and the [pexpect](https://pe
 ##Platforms known to be compatible
 - Linux Ubuntu, Debian and others for sure but we haven't tested it yet. 
 - Cygwin on Windows
+
+##Known problems
+>- there is a bug with PyCrypto install, more details on the [problem]https://github.com/dlitz/pycrypto/issues/108 and a [workaround solution]https://github.com/tootedom/related/blob/master/provisioning/ansible-playground/README.md
 
 ##Rewards
 - Pexpect and Pcrypto authors and developers
