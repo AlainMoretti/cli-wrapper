@@ -216,26 +216,34 @@ for host in listhosts_cleaned:
     if args.logfile:
         if not os.path.isdir(constants.LOGDIR):
             print('create a folder '+constants.LOGDIR+' to store logging files')
-            os.makedirs(constants.LOGDIR) 
+            os.makedirs(constants.LOGDIR)
         logfile = constants.LOGDIR+'/'+h+'_'+('%12x' % random.randrange(16**12)).upper()+'.log'
         try:
            fout = open(logfile,'wb')
-           c.logfile_read = fout
+           # special case for commands logging
+           if not (args.cmdfile or args.cmd):c.logfile_read = fout
            print("\t>>> now logging output from "+h+" in "+logfile)
         except (IOError, OSError) as e:
            print('cannot log output because logfile cannot be opened...')
            print "I/O error({0}): {1}".format(e.errno, e.strerror)
     else:c.logfile_read = sys.stdout
-    
+
     # if commands in args or in a cmdfile, prepare terminal length
     if args.cmdfile or args.cmd:
         c.sendline(args.more)
-        c.expect(args.prompt) 
+        c.expect(args.prompt)
         print("\t>>> now executing commands from "+str(listcmd_cleaned)+" on "+h)
-        # and loop through them until done 
+        # loop through the commands
         for line in listcmd_cleaned:
             c.sendline(line)
             c.expect(args.prompt)
+            # if logfile is set, we send a clean output inside the loop
+            if args.logfile:
+               try:fout.write(c.before)
+               except (IOError, OSError) as e:print('cannot log output to '+args.logfile+' :'+e)
+        # and restore initial logging setup
+        if args.logfile:c.logfile_read = fout
+        else:c.logfile_read = sys.stdout
             
     #execute sub method
     if args.sub:
