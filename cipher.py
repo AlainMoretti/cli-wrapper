@@ -19,7 +19,7 @@ import os.path
 import re
 
 from libs import constants
-from libs import getpass
+from libs.getpass import getpass
 from libs.cryptolib import encrypt_file
 from libs.cryptolib import decrypt_file
 
