@@ -49,8 +49,8 @@ p = argparse.ArgumentParser(
 )
 
 mut_excl_1 = p.add_mutually_exclusive_group()
-mut_excl_1.add_argument('-f', '--hosts-file', action='store', type=str, dest='array', help='file containing a list of hosts')
-mut_excl_1.add_argument('-r', '--remote-host', action='store', type=str, dest='remote', help='remote host name or IP')
+mut_excl_1.add_argument('-f', '--hosts-file', action='store', type=str, dest='array', metavar='FILE', help='file containing a list of hosts')
+mut_excl_1.add_argument('-r', '--remote-host', action='store', type=str, dest='remote', metavar='REMOTE_HOSTNAME', help='remote host name or IP')
 
 mut_excl_2 = p.add_mutually_exclusive_group()
 mut_excl_2.add_argument('-c', '--command', action='store',type=str, dest='cmd', nargs='+', metavar='COMMAND', 
@@ -63,7 +63,7 @@ p.add_argument('-i', '--interact', action='store_false',dest='interact', help='d
 p.add_argument('-j', '--jumphost-credentials', action='store',type=str, dest='jumphost', metavar='LIST', nargs='+',
     help='an ordered list: (protocol,host,port,username,password,prompt,timeout,verbose)\nyou can omit latest elements')
 p.add_argument('-l', '--logfile', action='store_true', dest='logfile', help='create a logging file in "logs" subdirectory')
-p.add_argument('-m', '--no-more', action='store',type=str, dest='more', 
+p.add_argument('-m', '--no-more', action='store',type=str, dest='more', default="terminal length 0",
     help='command to pass to remote host to avoid --more-- in execution')
 p.add_argument('-o', '--options-override', action='store',type=str, dest='override', 
     help='ciphered file containing arguments that override command line options')
@@ -80,7 +80,6 @@ p.add_argument('-x', '--protocol', action='store',type=str, dest='proto', choice
 p.set_defaults(          
    interact=True,
    logfile=False,
-   more='terminal length 0',
    prompt='\n[^\n]+[>#](\s|)$',
    verbose=False,
    timeout='15',
