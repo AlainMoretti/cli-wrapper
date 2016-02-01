@@ -58,7 +58,7 @@ mut_excl_2.add_argument('-c', '--command', action='store',type=str, dest='cmd', 
 mut_excl_2.add_argument('-cf', '--command-file', action='store',type=str, dest='cmdfile', metavar='COMMAND_FILE',
     help='file containing a list of commands')
 
-p.add_argument('-d', '--debug', action='store_true',dest='debug', help='debug mode will out in cear all arguments passed to the script')
+p.add_argument('-d', '--debug', action='store_true',dest='debug', help='debug mode will out in clear all arguments passed to the script')
 p.add_argument('-i', '--interact', action='store_false',dest='interact', help='do not interact after connection')
 p.add_argument('-j', '--jumphost-credentials', action='store',type=str, dest='jumphost', metavar='LIST', nargs='+',
     help='an ordered list: (protocol,host,port,username,password,prompt,timeout,verbose)\nyou can omit latest elements')
@@ -75,7 +75,6 @@ p.add_argument('-t', '--timeout', action='store',type=int, dest='timeout', help=
 p.add_argument('-u', '--username-credentials', action='store',type=str, dest='user', nargs='+', metavar=('USERNAME'),
     help='username and optionally an ordered list: (password, enable password)')
 p.add_argument('-v', '--verbose', action='store_true', dest='verbose', help='unhide connection process, usefull for debugging')
-p.add_argument('-w', '--password', action='store',type=str, dest='pwd', help='login password')
 p.add_argument('-x', '--protocol', action='store',type=str, dest='proto', choices=['telnet','ssh'], help='protocol to be used for connection')
 
 p.set_defaults(          
