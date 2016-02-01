@@ -1,7 +1,7 @@
 # Cli-wrapper 
 ##A small project to automate CLI based tasks
 
->_Because we thing CLI is here to stay, at least for troubleshooting purposes_  
+>_Because we think CLI is here to stay, at least for troubleshooting purposes_  
 >_Because we use it on a daily basis_  
 >_Because we were tired of reinventing the wheel..._  
 
@@ -40,7 +40,7 @@ We decided to build this small project using Python and the [pexpect](https://pe
 - Cygwin on Windows
 
 ##Known problems
->- there is a bug with PyCrypto install, more details on the [problem]https://github.com/dlitz/pycrypto/issues/108 and a [workaround solution]https://github.com/tootedom/related/blob/master/provisioning/ansible-playground/README.md
+>- there is a bug with PyCrypto install, more details on the [problem](https://github.com/dlitz/pycrypto/issues/108) and a [workaround solution](https://github.com/tootedom/related/blob/master/provisioning/ansible-playground/README.md)
 
 ##Rewards
 - Pexpect and Pcrypto authors and developers
