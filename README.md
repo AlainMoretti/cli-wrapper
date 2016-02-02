@@ -152,11 +152,12 @@ amoretti@bytel:~/cli-wrapper$
 ```
 
 ##Install
-- grab the package from Github
+- grab the package from Github using `git clone` for example
 - install it anywhere on your machine
 - read `requirements.txt` for a list of Python modules required by the application
   you can use `pip install -r requirements.txt` but PyCrypto install will fail (see known problems below)
 - modify environment variables stored in `libs/constants.py` if needed
+- keep your setup up to date : `git pull`
 
 ##Howto use ?
 - simply execute `cli.py --help` from command line, and follow the guidelines
