@@ -81,14 +81,15 @@ p.add_argument('-x', '--protocol', action='store',type=str, dest='proto', choice
     help='protocol to be used for connection, defaults to ssh')
 
 p.set_defaults(          
+   debug=False,
    interact=True,
    logfile=False,
    more='terminal length 0',
    prompt='\n[^\n]+[>#](\s|)$',
-   verbose=False,
-   timeout='15',
    proto='ssh',
-   debug=False
+   timeout='15',
+   user='',
+   verbose=False
 )
 
 # parse arguments from command line
@@ -96,11 +97,12 @@ args = p.parse_args()
 
 # if "o" options is set,override arguments from local encrypted file 
 if args.override:
-   if not os.path.isfile(args.override):exit('Invalid filename: "'+args.override+'"')
+   if not os.path.isfile(args.override):exit('ERROR: Invalid filename: "'+args.override+'"')
    else:
        password = getpass('Please enter your password: ')
        key = hashlib.sha256(password).digest()
-       args_override = decrypt_file_to_array(key,args.override)
+       try:args_override = decrypt_file_to_array(key,args.override)
+       except ValueError:exit('ERROR: The file '+args.override+' does not seem to be encrypted...')
        args_override_cleaned = CleanComments(args_override)
        if len(args_override_cleaned) == 0:
            exit('ERROR: wrong password, or file was empty...')
@@ -114,10 +116,7 @@ if args.debug:
     
 # we need at least one of them
 if (args.remote is None and args.array is None):
-    p.error('remote host IP address or name is required,\nyou miss either "-r" or "-f" option\n\n')
-
-# we need user credentials to know how to log into remote host    
-if not args.user:p.error('You need at least to specifiy the username you will be using with "-u" option')
+    p.error('ERROR: remote host IP address or name is required,\nyou miss either "-r" or "-f" option\n\n')
 
 # here below, we try to get a host list from user arguments so we can iterate over this afterwards
 if args.remote:
@@ -129,7 +128,7 @@ elif args.array:
        listhosts_cleaned = CleanComments(listhosts)
        args.interact = False
     except ValueError:
-       print("cannot open: "+args.array+" not a usable file..")  
+       print("ERROR: cannot open "+args.array+" not a usable file..")  
 if args.debug:
     print('List of hosts:')
     pprint.pprint(listhosts_cleaned)
@@ -142,7 +141,7 @@ if args.cmdfile:
         listcmd_cleaned = CleanComments(listcmd)
         args.interact = False
     except ValueError:
-       print("cannot open: "+args.cmdfile+" not a usable file..")
+       print("ERROR: cannot open "+args.cmdfile+" not a usable file..")
 elif args.cmd:
     listcmd_cleaned = CleanComments(args.cmd)
     args.interact = False
@@ -176,7 +175,7 @@ if args.jumphost:
     try:args.jumphost[5]
     except:args.jumphost.append('')
     c = Connection(*(args.jumphost+[args.timeout]+[args.verbose]))
-    if c == False:exit('Cannot connect to jumphost') 
+    if c == False:exit('ERROR: Cannot connect to jumphost') 
     
 #import sub procedure
 if args.sub:
@@ -195,7 +194,7 @@ for host in listhosts_cleaned:
             args.prompt,args.timeout,args.verbose
         )
         if c == False:
-            print('Cannot connect to remote host: '+h)
+            print('ERROR: Cannot connect to remote host: '+h)
             continue
     else:
         cmd = BuildCommand(args.proto,h,args.port,args.user)
@@ -204,7 +203,7 @@ for host in listhosts_cleaned:
             args.prompt,args.timeout,args.verbose
         )
         if l == False:
-            print('Cannot connect to remote host: '+h)
+            print('ERROR: Cannot connect to remote host: '+h)
             continue
     
     #now switch to enable mode if needed       
@@ -242,7 +241,7 @@ for host in listhosts_cleaned:
             # if logfile is set, we send a clean output inside the loop
             if args.logfile:
                try:fout.write(c.before)
-               except (IOError, OSError) as e:print('cannot log output to '+args.logfile+' :'+e)
+               except (IOError, OSError):print('WARNING: cannot log output to '+args.logfile)
         # and restore initial logging setup
         if args.logfile:c.logfile_read = fout
         else:c.logfile_read = sys.stdout

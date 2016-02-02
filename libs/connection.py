@@ -21,6 +21,7 @@ from libs import constants
 def BuildCommand(protocol,host,port,username):
     res = False
     if protocol == 'ssh':
+       if username == '':exit("ERROR:: you cannot use ssh without a username...")
        cmd = constants.SSH_BINARY+' -p '+str(port)+' -l '+username+' '+host
        res = True
     elif protocol == 'telnet':
@@ -72,6 +73,7 @@ def Login(p,protocol,host,port,username,password,prompt,timeout,verbose):
         if SendPassword(password,prompt,p,timeout):
            res = True       
     elif index == 2:
+        if username == '':exit("ERROR: you haven't provided any username, but remote host is asking for it...")
         p.sendline(username)
         p.expect('assword:')
         if SendPassword(password,prompt,p,timeout):
@@ -100,7 +102,7 @@ def SendPassword(password,prompt,connection,timeout):
         res = True
     elif index == 1:
         connection.sendline(password)
-        print('seems that we didn\'t send the right password')
+        print('ERROR: seems that we didn\'t send the right password')
         res = False
     elif index == 2:
         print('\ntimeout after '+str(timeout)+' seconds when trying to send password...')
