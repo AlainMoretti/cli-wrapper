@@ -18,5 +18,10 @@
 #you can change any of them to fit your needs without breaking anything !!!
 DEFAULT_SHELL='/bin/bash'
 LOGDIR = 'logs'
+# LOGFILE_NAME can be: 
+# CODE            EXAMPLE  
+# RANDOM_STRING   remote-host_BDB0148E53E6.log
+# DATE            remote-host_20160130145907.log
+LOGFILE_NAME = 'RANDOM_STRING' 
 SSH_BINARY = '/usr/bin/ssh'
 TELNET_BINARY = 'telnet'

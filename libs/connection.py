@@ -30,20 +30,6 @@ def BuildCommand(protocol,host,port,username):
     if res: return cmd
     else: return False
 
-def CleanComments(array):
-    cleaning = False
-    for i, item in enumerate(array):
-        if item[0] == '#':
-            array[i] = ''
-            cleaning = True
-    array = [x.strip(' ') for x in array]
-    remove = True
-    while remove:
-        try:
-            array.remove('')
-        except:remove = False
-    return array
-
 def Connection(protocol,host,port,username,password,prompt,timeout,verbose):
     try:cmd = BuildCommand(protocol, host, port, username)
     except ValueError as e:exit(e)

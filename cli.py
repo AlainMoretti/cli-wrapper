@@ -16,18 +16,18 @@
 import argparse
 import pprint
 import sys
-import random
 import os
 import hashlib
 
 from libs import constants
 from libs.connection import BuildCommand
-from libs.connection import CleanComments
 from libs.connection import Connection
 from libs.connection import Login
 from libs.connection import SendPassword
 from libs.cryptolib import decrypt_file_to_array
 from libs.getpass import getpass
+from libs.utils import BuildLogfile
+from libs.utils import CleanComments
 
 
 p = argparse.ArgumentParser(
@@ -215,10 +215,7 @@ for host in listhosts_cleaned:
     
     #create a random name for logfile if asked to do so
     if args.logfile:
-        if not os.path.isdir(constants.LOGDIR):
-            print('create a folder '+constants.LOGDIR+' to store logging files')
-            os.makedirs(constants.LOGDIR)
-        logfile = constants.LOGDIR+'/'+h+'_'+('%12x' % random.randrange(16**12)).upper()+'.log'
+        logfile = BuildLogfile(h) 
         try:
            fout = open(logfile,'wb')
            # special case for commands logging
