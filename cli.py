@@ -88,7 +88,6 @@ p.set_defaults(
    verbose=False,
    timeout='15',
    proto='ssh',
-   port='22',
    debug=False
 )
 
@@ -153,6 +152,8 @@ if args.debug and (args.cmdfile or args.cmd):
     
 # empty default port number if telnet without port options
 if args.proto == 'telnet' and not args.port:args.port = ''
+# defaults to port number 22 if ssh without port options
+if args.proto == 'ssh' and not args.port:args.port = '22'
 
 # complete password array with empty strings
 if args.password:
