@@ -154,17 +154,17 @@ amoretti@bytel:~/cli-wrapper$
 ##Install
 - grab the package from Github
 - install it anywhere on your machine
-- read "requirements.txt" for a list of Python modules required by the application
-  you can use "pip install -r requirements.txt" but PyCrypto install will fail (see known problems below)
-- modify environment variables stored in "libs/constants.py" if needed
+- read `requirements.txt` for a list of Python modules required by the application
+  you can use `pip install -r requirements.txt` but PyCrypto install will fail (see known problems below)
+- modify environment variables stored in `libs/constants.py` if needed
 
 ##Howto use ?
-- simply execute "cli.py --help" from command line, and follow the guidelines
+- simply execute `cli.py --help` from command line, and follow the guidelines
 - if you want to store your passwords securely, you should : 
   - put them in a plain text file (see "profiles/sample" or "plaintext" files)
-  - cipher the file using "cipher.py" utility with a single password
+  - cipher the file using `cipher.py` utility with a single password
   - delete the original plain file
-  - from now on, you can use "--override" option to inject your credentials into the program
+  - from now on, you can use `--override` option to inject your credentials into the program
 
 ##Features we have
 - automation of connection and authentication phases in a secure way
