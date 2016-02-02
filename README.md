@@ -8,7 +8,7 @@
 We decided to build this small project using Python and the [pexpect](https://pexpect.readthedocs.org/en/stable/) module. 
 
 ##What does cli-wrapper do ? 
-###It automates login and let you interact with the device
+###It automates login and let you interact with a remote device
 ```
 user@m32e:~/cli-wrapper$ cli.py -u username -w password -r csr1000v-1  -x telnet
 
