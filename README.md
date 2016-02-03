@@ -5,7 +5,7 @@
 >_Because we use it on a daily basis_  
 >_Because we were tired of reinventing the wheel..._  
 
-We decided to build this small project using Python and the [pexpect](https://pexpect.readthedocs.org/en/stable/) module. 
+We decided to build this small project using Python [pexpect](https://pexpect.readthedocs.org/en/stable/), [argparse](https://docs.python.org/3/library/argparse.html) and [pycrypto](https://www.dlitz.net/software/pycrypto/) modules. 
 
 ##What does cli-wrapper do ? 
 ###It automates login and let you interact with a remote device
