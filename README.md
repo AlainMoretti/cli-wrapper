@@ -190,9 +190,9 @@ user@m32e:~/cli-wrapper$
 - Cygwin on Windows
 
 ##Remote devices you can log into
-Any piece of equipment offering a decent command line interface. 
-Note that the expected prompt from the remote device is a regular expression that you can change. 
-Then the way you interact, either manually or automatically with the remote device il all yours.  
+Any piece of equipment offering a decent command line interface.  
+Note that the expected prompt from the remote device is a regular expression that you can change.   
+Then the way you interact, either manually or automatically with the remote device il all yours.   
 
 ##Known problems
 >- there is a bug with PyCrypto install, more details on the [problem](https://github.com/dlitz/pycrypto/issues/108) and a [workaround solution](https://github.com/tootedom/related/blob/master/provisioning/ansible-playground/README.md)
