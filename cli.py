@@ -78,15 +78,15 @@ p.add_argument('-v', '--verbose', action='store_true', dest='verbose', help='unh
 p.add_argument('-w', '--password', action='store',type=str, dest='password', nargs='+', metavar=('PASSWORD'),
     help='password to log into remote host and optionally an enable password')
 p.add_argument('-x', '--protocol', action='store',type=str, dest='proto', choices=['telnet','ssh'], 
-    help='protocol to be used for connection, defaults to ssh')
+    help='protocol to be used for connection, defaults to '+constants.PROTOCOL)
 
 p.set_defaults(          
    debug=False,
    interact=True,
    logfile=False,
-   more='terminal length 0',
-   prompt='\n[^\n]+[>#](\s|)$',
-   proto='ssh',
+   more=constants.MORE,
+   prompt=constants.PROMPT,
+   proto=constants.PROTOCOL,
    timeout='15',
    user='',
    verbose=False

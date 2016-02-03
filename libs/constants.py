@@ -22,6 +22,10 @@ LOGDIR = 'logs'
 # CODE            EXAMPLE  
 # RANDOM_STRING   remote-host_BDB0148E53E6.log
 # DATE            remote-host_20160130145907.log
-LOGFILE_NAME = 'RANDOM_STRING' 
+LOGFILE_NAME='RANDOM_STRING' 
+MORE='terminal length 0'
+PROMPT='\n[^\n]+[>#](\s|)$'
+PASSWORD_PROMPT='(p|P)assword:\s?$'
+PROTOCOL='ssh'
 SSH_BINARY = '/usr/bin/ssh'
 TELNET_BINARY = 'telnet'

@@ -20,7 +20,8 @@ Connection closed by foreign host.
 
 user@m32e:~/cli-wrapper$
 ```
-###You can switch to enable mode if you provide a second password
+
+###You can switch to Cisco enable mode if you provide a second password
 ```
 user@m32e:~/cli-wrapper$ cli.py -u username -w password enablepassword -r csr1000v-1  -x telnet
 
@@ -32,7 +33,8 @@ Connection closed by foreign host.
 
 user@m32e:~/cli-wrapper$
 ```
-###Execute one or several commands on remote device
+
+###Execute one or several commands on a remote device
 ```
 user@m32e:~/cli-wrapper$ cli.py -u username -w password -r csr1000v-1 -x telnet -c 'sho ip int brief | inc Gi'
 
@@ -47,6 +49,7 @@ GigabitEthernet5       10.0.0.6        YES TFTP   up                    up
 csr1000v-1>
 <<< gracefully exited from: csr1000v-1
 ```
+
 ###Send commands output to a log file
 ```
 user@m32e:~/cli-wrapper$ cli.py -u username -w password -r csr1000v-1 -x telnet -c 'sho ip int brief | inc Gi'
@@ -56,6 +59,7 @@ user@m32e:~/cli-wrapper$ cli.py -u username -w password -r csr1000v-1 -x telnet 
 
 <<< gracefully exited from: csr1000v-1
 ```
+
 ###Send a batch of commands from a file
 ```
 user@m32e:~/cli-wrapper$ cat > commands/sample_2
@@ -69,6 +73,7 @@ user@m32e:~/cli-wrapper$ cli.py -u username -w password -r csr1000v-1 -x telnet 
 
 <<< gracefully exited from: csr1000v-1
 ```
+
 ###Send a batch of commands to a list of hosts
 ```
 user@m32e:~/cli-wrapper$ cli.py -u username -w password -f hosts/liste_csr1000v -x telnet -cf commands/sample_
@@ -92,9 +97,8 @@ user@m32e:~/cli-wrapper$ cli.py -u username -w password -f hosts/liste_csr1000v 
 	>>> now executing commands from ['show ip route', 'show ip int brief', 'sho logging'] on csr1000v-4
 
 <<< gracefully exited from: csr1000v-4
-
-user@m32e:~/cli-wrapper$
 ```
+
 ###And many other options...
 ```
 user@m32e:~/cli-wrapper$ cli.py -h
@@ -148,7 +152,7 @@ optional arguments:
                         enable password
   -x {telnet,ssh}, --protocol {telnet,ssh}
                         protocol to be used for connection, defaults to ssh
-amoretti@bytel:~/cli-wrapper$
+user@m32e:~/cli-wrapper$
 ```
 
 ##Install
@@ -184,6 +188,11 @@ amoretti@bytel:~/cli-wrapper$
 ##Platforms known to be compatible
 - Linux Ubuntu, Debian and others for sure but we haven't tested it yet. 
 - Cygwin on Windows
+
+##Remote devices you can log into
+Any piece of equipment offering a decent command line interface. 
+Note that the expected prompt from the remote device is a regular expression that you can change. 
+Then the way you interact, either manually or automatically with the remote device il all yours.  
 
 ##Known problems
 >- there is a bug with PyCrypto install, more details on the [problem](https://github.com/dlitz/pycrypto/issues/108) and a [workaround solution](https://github.com/tootedom/related/blob/master/provisioning/ansible-playground/README.md)

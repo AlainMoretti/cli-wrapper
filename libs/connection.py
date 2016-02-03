@@ -47,7 +47,7 @@ def Login(p,protocol,host,port,username,password,prompt,timeout,verbose):
         prompt,
         "Are you sure you want to continue",
         '((u|U)sername|(l|L)ogin):\s?$',
-        '(p|P)assword:\s?$',
+        constants.PASSWORD_PROMPT,
         pexpect.TIMEOUT,
         pexpect.EOF
     ])
@@ -55,13 +55,13 @@ def Login(p,protocol,host,port,username,password,prompt,timeout,verbose):
         res = True
     elif index == 1:
         p.sendline('yes')
-        p.expect('assword:')
+        p.expect(constants.PASSWORD_PROMPT)
         if SendPassword(password,prompt,p,timeout):
            res = True       
     elif index == 2:
         if username == '':exit("ERROR: you haven't provided any username, but remote host is asking for it...")
         p.sendline(username)
-        p.expect('assword:')
+        p.expect(constants.PASSWORD_PROMPT)
         if SendPassword(password,prompt,p,timeout):
            res = True 
     elif index == 3:
@@ -80,7 +80,7 @@ def SendPassword(password,prompt,connection,timeout):
     connection.sendline(password)
     index = connection.expect([
         prompt,
-        '(p|P)assword:',
+        constants.PASSWORD_PROMPT,
         pexpect.TIMEOUT,
         pexpect.EOF
     ])
