@@ -98,6 +98,39 @@ user@m32e:~/cli-wrapper$ cli.py -u username -w password -f hosts/liste_csr1000v 
 
 <<< gracefully exited from: csr1000v-4
 ```
+###Send a batch of commands to a list of hosts, using an encrypted profile for login and passwords
+```
+user@m32e:~/cli-wrapper$ cat profiles/sample
+#
+--username-credentials
+  myLoginAccount
+--password
+  mySecretPassword
+#
+user@m32e:~/cli-wrapper$
+user@m32e:~/cli-wrapper$ ./cipher.py
+What do you wanna do ? decrypt/encrypt - [D/e]: e
+What is the filename you want to encrypt ? profiles/sample
+Please enter your password: *********
+Encrypt "profiles/sample" and save it in "profiles/sample.enc"
+user@m32e:~/cli-wrapper$ ./cli.py -f hosts/xrvs -o profiles/sample.enc -cf commands/ipRoutesXr -l
+Please enter your password:
+        >>> now logging output from xrv1.xyz in logs/xrv1.xyz_6792508A8CDC.log
+        >>> now executing commands from ['show route ipv4', 'show route ipv6'] on xrv1.xyz
+<<< gracefully exited from: xrv1.xyz
+
+        >>> now logging output from xrv2.xyz in logs/xrv2.xyz_C109B3CDD1B3.log
+        >>> now executing commands from ['show route ipv4', 'show route ipv6'] on xrv2.xyz
+<<< gracefully exited from: xrv2.xyz
+
+        >>> now logging output from xrv3.xyz in logs/xrv3.xyz_CD502442E225.log
+        >>> now executing commands from ['show route ipv4', 'show route ipv6'] on xrv3.yz
+<<< gracefully exited from: xrv3.xyz
+
+        >>> now logging output from xrv4.xyz in logs/xrv4.xyz_F48C73F48520.log
+        >>> now executing commands from ['show route ipv4', 'show route ipv6'] on xrv4.xyz
+<<< gracefully exited from: xrv4.xyz
+```
 
 ###And many other options...
 ```
