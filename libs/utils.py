@@ -14,6 +14,7 @@
 
 import os
 from libs import constants
+from _ctypes import Array
 
 def BuildLogfile(h):
     if not os.path.isdir(constants.LOGDIR):
@@ -31,11 +32,18 @@ def BuildLogfile(h):
 
 def CleanComments(array):
     cleaning = False
+    remove = True
+    #try to remove empty lines if any
+    while remove:
+        try:
+            array.remove('')
+        except:remove = False
     for i, item in enumerate(array):
         if item[0] == '#':
             array[i] = ''
             cleaning = True
     array = [x.strip(' ') for x in array]
+    #try to remove empty lines if commented lines are found above
     remove = True
     while remove:
         try:
