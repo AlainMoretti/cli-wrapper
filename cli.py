@@ -23,6 +23,7 @@ from libs import constants
 from libs.connection import BuildCommand
 from libs.connection import Connection
 from libs.connection import Login
+from libs.connection import SendCommand
 from libs.connection import SendPassword
 from libs.cryptolib import decrypt_file_to_array
 from libs.getpass import getpass
@@ -226,13 +227,11 @@ for host in listhosts_cleaned:
 
     # if commands in args or in a cmdfile, prepare terminal length
     if args.cmdfile or args.cmd:
-        c.sendline(args.more)
-        c.expect(args.prompt)
+        SendCommand(c,args.more,args.prompt)
         print("\t>>> now executing commands from "+str(listcmd_cleaned)+" on "+h)
         # loop through the commands
         for line in listcmd_cleaned:
-            c.sendline(line)
-            c.expect(args.prompt)
+            SendCommand(c,line,args.prompt)
             # if logfile is set, we send a clean output inside the loop
             if args.logfile:
                try:fout.write(c.before)
@@ -248,8 +247,7 @@ for host in listhosts_cleaned:
     
     # pass in interact mode, hit ^F to end connection
     if args.interact is True:
-        c.sendline('\n')
-        c.expect(args.prompt)
+        SendCommand(c,'\n',args.prompt)
         c.interact('\x06')
         print('\n<<< gracefully exited from: '+h+'\n')
     else:

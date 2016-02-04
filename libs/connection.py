@@ -97,3 +97,21 @@ def SendPassword(password,prompt,connection,timeout):
         print('\nremote host unexpectedly closed the connection when sending password...')
         res = False
     return res
+
+def SendCommand(connection,command,prompt):
+    res = False
+    connection.sendline(command)
+    index = connection.expect([
+        prompt,
+        pexpect.TIMEOUT,
+        pexpect.EOF
+    ])
+    if index == 0:
+        res = True
+    elif index == 1:
+        print('\ntimeout after '+str(timeout)+' seconds when trying to send password...')
+        res = False
+    elif index == 2:
+        print('\nremote host unexpectedly closed the connection...')
+        res = False
+    return res
