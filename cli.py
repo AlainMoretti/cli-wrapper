@@ -139,12 +139,10 @@ if args.cmdfile:
         f = open(args.cmdfile)
         listcmd = f.read().splitlines()
         listcmd_cleaned = CleanComments(listcmd)
-        args.interact = False
     except ValueError:
        print("ERROR: cannot open "+args.cmdfile+" not a usable file..")
 elif args.cmd:
     listcmd_cleaned = CleanComments(args.cmd)
-    args.interact = False
 if args.debug and (args.cmdfile or args.cmd):
     print('List of commands:')
     pprint.pprint(listcmd_cleaned)   
