@@ -117,7 +117,7 @@ if args.debug:
     
 # we need at least one of them
 if (args.remote is None and args.array is None):
-    p.error('ERROR: remote host IP address or name is required,\nyou miss either "-r" or "-f" option\n\n')
+    p.error(' remote host IP address or name is required,\nyou miss either "-r" or "-f" option\n\n')
 
 # here below, we try to get a host list from user arguments so we can iterate over this afterwards
 if args.remote:
@@ -129,7 +129,7 @@ elif args.array:
        listhosts_cleaned = CleanComments(listhosts)
        args.interact = False
     except ValueError:
-       print("ERROR: cannot open "+args.array+" not a usable file..")  
+       print("WARNING: cannot open "+args.array+" not a usable file..")  
 if args.debug:
     print('List of hosts:')
     pprint.pprint(listhosts_cleaned)
@@ -221,14 +221,14 @@ for host in listhosts_cleaned:
            if not (args.cmdfile or args.cmd):c.logfile_read = fout
            print("\t>>> now logging output from "+h+" in "+logfile)
         except (IOError, OSError) as e:
-           print('cannot log output because logfile cannot be opened...')
+           print('WARNING; cannot log output because logfile cannot be opened...')
            print "I/O error({0}): {1}".format(e.errno, e.strerror)
     else:c.logfile_read = sys.stdout
 
     # if commands in args or in a cmdfile, prepare terminal length
     if args.cmdfile or args.cmd:
         SendCommand(c,args.more,args.prompt)
-        print("\t>>> now executing commands from "+str(listcmd_cleaned)+" on "+h)
+        print("\n\t>>> now executing commands from "+str(listcmd_cleaned)+" on "+h)
         # loop through the commands
         for line in listcmd_cleaned:
             SendCommand(c,line,args.prompt)

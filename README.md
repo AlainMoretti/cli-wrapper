@@ -56,7 +56,6 @@ user@m32e:~/cli-wrapper$ cli.py -u username -w password -r csr1000v-1 -x telnet 
   'show ip route' -l
 	>>> now logging output from csr1000v-1 in logs/csr1000v-1_D30A74ADA26C.log
 	>>> now executing commands from ['sho ip int brief | inc Gi', 'show ip route'] on csr1000v-1
-
 <<< gracefully exited from: csr1000v-1
 ```
 
@@ -70,7 +69,6 @@ user@m32e:~/cli-wrapper$
 user@m32e:~/cli-wrapper$ cli.py -u username -w password -r csr1000v-1 -x telnet -cf commands/sample_2 -l
 	>>> now logging output from csr1000v-1 in logs/csr1000v-1_7C4C722E185B.log
 	>>> now executing commands from ['show ip route', 'show ip int brief', 'sho logging'] on csr1000v-1
-
 <<< gracefully exited from: csr1000v-1
 ```
 
@@ -80,24 +78,18 @@ user@m32e:~/cli-wrapper$ cli.py -u username -w password -f hosts/liste_csr1000v 
 2 -l
 	>>> now logging output from csr1000v-1 in logs/csr1000v-1_F69181CBB187.log
 	>>> now executing commands from ['show ip route', 'show ip int brief', 'sho logging'] on csr1000v-1
-
 <<< gracefully exited from: csr1000v-1
-
 	>>> now logging output from csr1000v-2 in logs/csr1000v-2_196E7D86E698.log
 	>>> now executing commands from ['show ip route', 'show ip int brief', 'sho logging'] on csr1000v-2
-
 <<< gracefully exited from: csr1000v-2
-
 	>>> now logging output from csr1000v-3 in logs/csr1000v-3_91F885603B1D.log
 	>>> now executing commands from ['show ip route', 'show ip int brief', 'sho logging'] on csr1000v-3
-
 <<< gracefully exited from: csr1000v-3
-
 	>>> now logging output from csr1000v-4 in logs/csr1000v-4_E2C17A24952E.log
 	>>> now executing commands from ['show ip route', 'show ip int brief', 'sho logging'] on csr1000v-4
-
 <<< gracefully exited from: csr1000v-4
 ```
+
 ###Send a batch of commands to a list of hosts, using an encrypted profile for login and passwords
 ```
 user@m32e:~/cli-wrapper$ cat profiles/sample
@@ -118,15 +110,12 @@ Please enter your password:
         >>> now logging output from xrv1.xyz in logs/xrv1.xyz_6792508A8CDC.log
         >>> now executing commands from ['show route ipv4', 'show route ipv6'] on xrv1.xyz
 <<< gracefully exited from: xrv1.xyz
-
         >>> now logging output from xrv2.xyz in logs/xrv2.xyz_C109B3CDD1B3.log
         >>> now executing commands from ['show route ipv4', 'show route ipv6'] on xrv2.xyz
 <<< gracefully exited from: xrv2.xyz
-
         >>> now logging output from xrv3.xyz in logs/xrv3.xyz_CD502442E225.log
         >>> now executing commands from ['show route ipv4', 'show route ipv6'] on xrv3.yz
 <<< gracefully exited from: xrv3.xyz
-
         >>> now logging output from xrv4.xyz in logs/xrv4.xyz_F48C73F48520.log
         >>> now executing commands from ['show route ipv4', 'show route ipv6'] on xrv4.xyz
 <<< gracefully exited from: xrv4.xyz
@@ -225,7 +214,7 @@ user@m32e:~/cli-wrapper$
 ##Remote devices you can log into
 Any piece of equipment offering a decent command line interface.  
 Note that the expected prompt from the remote device is a regular expression that you can change.   
-Then the way you interact, either manually or automatically with the remote device il all yours.   
+Then the way you interact, either manually or automatically, with the remote device is all yours.   
 
 ##Known problems
 >- there is a bug with PyCrypto install, more details on the [problem](https://github.com/dlitz/pycrypto/issues/108) and a [workaround solution](https://github.com/tootedom/related/blob/master/provisioning/ansible-playground/README.md)
