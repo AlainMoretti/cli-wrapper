@@ -227,11 +227,11 @@ for host in listhosts_cleaned:
 
     # if commands in args or in a cmdfile, prepare terminal length
     if args.cmdfile or args.cmd:
-        SendCommand(c,args.more,args.prompt)
+        SendCommand(c,args.more,args.prompt,args.timeout)
         print("\n\t>>> now executing commands from "+str(listcmd_cleaned)+" on "+h)
         # loop through the commands
         for line in listcmd_cleaned:
-            SendCommand(c,line,args.prompt)
+            SendCommand(c,line,args.prompt,args.timeout)
             # if logfile is set, we send a clean output inside the loop
             if args.logfile:
                try:fout.write(c.before)
@@ -247,7 +247,7 @@ for host in listhosts_cleaned:
     
     # pass in interact mode, hit ^F to end connection
     if args.interact is True:
-        SendCommand(c,'\n',args.prompt)
+        SendCommand(c,'\n',args.prompt,args.timeout)
         c.interact('\x06')
         print('\n<<< gracefully exited from: '+h+'\n')
     else:

@@ -16,6 +16,7 @@ import pexpect
 import sys
 
 from libs import constants
+from _socket import timeout
 
 
 def BuildCommand(protocol,host,port,username):
@@ -98,7 +99,7 @@ def SendPassword(password,prompt,connection,timeout):
         res = False
     return res
 
-def SendCommand(connection,command,prompt):
+def SendCommand(connection,command,prompt,timeout):
     res = False
     connection.sendline(command)
     index = connection.expect([
