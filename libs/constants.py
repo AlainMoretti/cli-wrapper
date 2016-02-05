@@ -27,5 +27,7 @@ MORE='terminal length 0'
 PROMPT='\n[^\n]+[>#](\s|)$'
 PASSWORD_PROMPT='(p|P)assword:\s?$'
 PROTOCOL='ssh'
+# here below you can pass arguments to ssh except '-p' and '-l'
+# that are already used by the application itself
 SSH_BINARY = '/usr/bin/ssh'
 TELNET_BINARY = 'telnet'
