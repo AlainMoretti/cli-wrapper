@@ -257,7 +257,7 @@ def main():
         # pass in interact mode, hit ^F to end connection
         if args.interact is True:
             SendCommand(c, '\n', args.prompt, args.timeout)
-            c.interact('\x06')
+            c.interact(constants.ESCAPE_CHARACTER)
             print('\n<<< gracefully exited from: ' + h + '\n')
         else:
             if not args.jumphost:c.close(force=True)

@@ -17,6 +17,10 @@
 #some constants used in the application
 #you can change any of them to fit your needs without breaking anything !!!
 DEFAULT_SHELL='/bin/bash'
+#here below you can define what is the escape character in interaction mode
+#defaults to 'Ctrl - ]' which is the common escape char in telnet
+#if you want a 'Ctrl - C' instead, the code is '\x03'
+ESCAPE_CHARACTER='\x1d'
 LOGDIR = 'logs'
 # LOGFILE_NAME can be: 
 # CODE            EXAMPLE  
