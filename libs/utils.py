@@ -22,7 +22,7 @@ def BuildLogfile(h):
         os.makedirs(constants.LOGDIR)
     if constants.LOGFILE_NAME == 'RANDOM_STRING':
         import random
-        logname = ('%12x' % random.randrange(16**12)).upper()
+        logname = ('%12x' % random.randrange(16**12)).strip()
     elif constants.LOGFILE_NAME == 'DATE':
         import datetime
         logname = datetime.datetime.now().strftime("%Y%m%d%H%M%S")

@@ -238,6 +238,7 @@ def main():
         if args.cmdfile or args.cmd:
             SendCommand(c, args.more, args.prompt, args.timeout)
             print("\n\t>>> now executing commands from " + str(listcmd_cleaned) + " on " + h)
+            if args.logfile:c.logfile_read = sys.stdout
             # loop through the commands
             for line in listcmd_cleaned:
                 SendCommand(c, line, args.prompt, args.timeout)
@@ -245,9 +246,6 @@ def main():
                 if args.logfile:
                    try:fout.write(c.before)
                    except (IOError, OSError):print('WARNING: cannot log output to ' + args.logfile)
-            # and restore initial logging setup
-            if args.logfile:c.logfile_read = fout
-            else:c.logfile_read = sys.stdout
                 
         # execute sub method
         if args.sub:
