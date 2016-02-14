@@ -167,6 +167,9 @@ def main():
         password = args.password[0]
         try:enablepassword = args.password[1]
         except:args.password.append('')
+    else:
+        password = ''
+        enablepassword = '' 
     
     # complete jumphost credentials array with empty strings and initiate connection
     if args.jumphost:

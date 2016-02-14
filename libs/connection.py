@@ -22,7 +22,7 @@ from _socket import timeout
 def BuildCommand(protocol,host,port,username):
     res = False
     if protocol == 'ssh':
-       if username == '':exit("ERROR:: you cannot use ssh without a username...")
+       if username == '':exit("ERROR: you cannot use ssh without a username...")
        cmd = constants.SSH_BINARY+' -p '+str(port)+' -l '+username+' '+host
        res = True
     elif protocol == 'telnet':
