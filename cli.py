@@ -229,7 +229,7 @@ def main():
             if SendPassword(enablepassword, args.prompt, c, args.timeout):
                 print("\n>>> connected to: " + h)
         
-        # create a random name for logfile if asked to do so
+        # create a logfile if asked to do so
         if args.logfile:
             logfile = BuildLogfile(h) 
             try:
@@ -252,7 +252,9 @@ def main():
                 SendCommand(c, line, args.prompt, args.timeout)
                 # if logfile is set, we send a clean output inside the loop
                 if args.logfile:
-                   try:fout.write(c.before)
+                   try:
+                       fout.write(c.before)
+                       fout.write('\n----- '+line+' -----\n')
                    except (IOError, OSError):print('WARNING: cannot log output to ' + args.logfile)
             # restore log options
             if args.logfile:c.logfile_read = fout
@@ -262,7 +264,7 @@ def main():
             try:submethod(c, args.prompt)
             except (ImportError, AttributeError, NameError) as e:exit(e)
         
-        # pass in interact mode, hit ^F to end connection
+        # pass in interact mode, hit escape character to end connection
         if args.interact is True:
             SendCommand(c, '\n', args.prompt, args.timeout)
             c.interact(constants.ESCAPE_CHARACTER)
