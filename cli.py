@@ -234,8 +234,7 @@ def main():
             logfile = BuildLogfile(h) 
             try:
                fout = open(logfile, 'wb')
-               # special case for commands logging
-               if not (args.cmdfile or args.cmd):c.logfile_read = fout
+               c.logfile_read = fout
                print("\t>>> now logging output from " + h + " in " + logfile)
             except (IOError, OSError) as e:
                print('WARNING; cannot log output because logfile cannot be opened...')
@@ -246,6 +245,7 @@ def main():
         if args.cmdfile or args.cmd:
             SendCommand(c, args.more, args.prompt, args.timeout)
             print("\n\t>>> now executing commands from " + str(listcmd_cleaned) + " on " + h)
+            # avoid sending twice the output to the logfile
             if args.logfile:c.logfile_read = sys.stdout
             # loop through the commands
             for line in listcmd_cleaned:
@@ -254,6 +254,8 @@ def main():
                 if args.logfile:
                    try:fout.write(c.before)
                    except (IOError, OSError):print('WARNING: cannot log output to ' + args.logfile)
+            # restore log options
+            if args.logfile:c.logfile_read = fout
                 
         # execute sub method
         if args.sub:
