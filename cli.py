@@ -253,8 +253,8 @@ def main():
                 # if logfile is set, we send a clean output inside the loop
                 if args.logfile:
                    try:
-                       fout.write(c.before)
                        fout.write('\n----- '+line+' -----\n')
+                       fout.write(c.before)
                    except (IOError, OSError):print('WARNING: cannot log output to ' + args.logfile)
             # restore log options
             if args.logfile:c.logfile_read = fout
