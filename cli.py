@@ -88,7 +88,7 @@ def main():
     p.add_argument('-w', '--password', action='store', type=str, dest='password', nargs='+', metavar=('PASSWORD'),
         help='password to log into remote host and optionally an enable password')
     p.add_argument('-x', '--protocol', action='store', type=str, dest='proto', choices=['telnet', 'ssh'],
-        help='protocol to be used for connection, defaults to ' + constants.PROTOCOL)
+        help='protocol to be used for connection, defaults to ' + constants.DEFAULT_PROTOCOL)
     
     p.set_defaults(
        debug=False,
@@ -96,7 +96,7 @@ def main():
        logfile=False,
        more=constants.MORE,
        prompt=constants.PROMPT,
-       proto=constants.PROTOCOL,
+       proto=constants.DEFAULT_PROTOCOL,
        timeout='15',
        user='',
        verbose=False
@@ -173,9 +173,14 @@ def main():
     
     # complete jumphost credentials array with empty strings and initiate connection
     if args.jumphost:
+        try:args.jumphost[0]
+        except:exit('ERROR: if "-j" option is set we need at least protocol and jumphost address') 
         try:args.jumphost[1]
-        except:args.jumphost.append('ssh')
-        try:args.jumphost[2]
+        except:exit('ERROR: if "-j" option is set we need at least protocol and jumphost address')
+        try:
+            args.jumphost[2]
+            try:int(args.jumphost[2])
+            except:exit('ERROR: "args.jumphost[2]" is not a valid port number')
         except:
             if args.jumphost[1] == 'ssh':args.jumphost.append('22')
             elif args.jumphost[1] == 'telnet':args.jumphost.append('')

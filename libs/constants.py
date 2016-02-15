@@ -16,6 +16,7 @@
 
 #some constants used in the application
 #you can change any of them to fit your needs without breaking anything !!!
+DEFAULT_PROTOCOL='ssh'
 DEFAULT_SHELL='/bin/bash'
 #here below you can define what is the escape character in interaction mode
 #defaults to 'Ctrl - ]' which is the common escape char in telnet
@@ -30,8 +31,12 @@ LOGFILE_NAME='RANDOM_STRING'
 MORE='terminal length 0'
 PROMPT='\n[^\n]+[>#](\s|)$'
 PASSWORD_PROMPT='(p|P)assword:\s?$'
-PROTOCOL='ssh'
 # here below you can pass arguments to ssh except '-p' and '-l'
 # that are already used by the application itself
 SSH_BINARY = '/usr/bin/ssh'
+# here after you can define the SSH command form that you will use
+# valid options are :  
+#    'USER_AT_HOST' eg : ssh username@hostname
+#    'L_OPTION'     eg : ssh -l username hostname
+SSH_COMMAND = 'USER_AT_HOST'
 TELNET_BINARY = 'telnet'
