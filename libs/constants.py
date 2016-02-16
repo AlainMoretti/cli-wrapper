@@ -33,7 +33,8 @@ PROMPT='\n[^\n]+[>#](\s|)$'
 PASSWORD_PROMPT='(p|P)assword:\s?$'
 # here below you can pass arguments to ssh except '-p' and '-l'
 # that are already used by the application itself
-SSH_BINARY = '/usr/bin/ssh'
+# SSH_BINARY = '/usr/bin/ssh'
+SSH_BINARY = 'ssh'
 # here after you can define the SSH command form that you will use
 # valid options are :  
 #    'USER_AT_HOST' eg : ssh username@hostname

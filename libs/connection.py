@@ -24,7 +24,8 @@ def BuildCommand(protocol,host,port,username):
     if protocol == 'ssh':
        if username == '':exit("ERROR: you cannot use ssh without a username...")
        if constants.SSH_COMMAND == 'USER_AT_HOST':
-           cmd = constants.SSH_BINARY+' -p '+str(port)+' '+username+'@'+host
+           if port == '22':cmd = constants.SSH_BINARY+' '+username+'@'+host
+           else:cmd = constants.SSH_BINARY+' -p '+str(port)+' '+username+'@'+host
        elif constants.SSH_COMMAND == 'L_OPTION':
            cmd = constants.SSH_BINARY+' -p '+str(port)+' -l '+username+' '+host
        else:exit('ERROR: "'+constants.SSH_COMMAND+'" is not a valid option...')
