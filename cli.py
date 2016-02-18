@@ -228,25 +228,29 @@ def main():
             c.expect('assword:')
             if SendPassword(enablepassword, args.prompt, c, args.timeout):
                 print("\n>>> connected to: " + h)
+                
+        # print internal details of pexpect object when debug option is turned on
+        if args.debug:print('\n\nPexpect object details:\n\n'+str(c))
         
         # create a logfile if asked to do so
         if args.logfile:
             logfile = BuildLogfile(h) 
             try:
                fout = open(logfile, 'wb')
-               c.logfile_read = fout
+               c.logfile = fout
+               c.logfile_send = None
                print("\t>>> now logging output from " + h + " in " + logfile)
             except (IOError, OSError) as e:
                print('WARNING; cannot log output because logfile cannot be opened...')
                print "I/O error({0}): {1}".format(e.errno, e.strerror)
-        else:c.logfile_read = sys.stdout
     
         # if commands in args or in a cmdfile, prepare terminal length
         if args.cmdfile or args.cmd:
             SendCommand(c, args.more, args.prompt, args.timeout)
             print("\n\t>>> now executing commands from " + str(listcmd_cleaned) + " on " + h)
             # avoid sending twice the output to the logfile
-            if args.logfile:c.logfile_read = sys.stdout
+            if args.logfile:c.logfile = None
+            else:c.logfile_read = sys.stdout
             # loop through the commands
             for line in listcmd_cleaned:
                 SendCommand(c, line, args.prompt, args.timeout)
@@ -257,7 +261,9 @@ def main():
                        fout.write(c.before)
                    except (IOError, OSError):print('WARNING: cannot log output to ' + args.logfile)
             # restore log options
-            if args.logfile:c.logfile_read = fout
+            if args.logfile:
+                c.logfile = fout
+                c.logfile_send = None
                 
         # execute sub method
         if args.sub:
