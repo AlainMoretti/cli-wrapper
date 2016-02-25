@@ -28,6 +28,7 @@ LOGDIR = 'logs'
 # RANDOM_STRING   remote-host_BDB0148E53E6.log
 # DATE            remote-host_20160130145907.log
 LOGFILE_NAME='RANDOM_STRING' 
+LOGFILE_EXTENSION='.txt'
 MORE='terminal length 0'
 PROMPT='\n[^\n]+[>#](\s|)$'
 PASSWORD_PROMPT='(p|P)assword:\s?$'

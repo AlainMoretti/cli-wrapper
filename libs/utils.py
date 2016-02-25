@@ -27,7 +27,7 @@ def BuildLogfile(h):
         import datetime
         logname = datetime.datetime.now().strftime("%Y%m%d%H%M%S")
     else:exit('ERROR: '+constants.LOGFILE_NAME+' is not an expected value for constant "LOGFILE_NAME"...')
-    logfile = constants.LOGDIR+'/'+h+'_'+logname+'.log' 
+    logfile = constants.LOGDIR+'/'+h+'_'+logname+constants.LOGFILE_EXTENSION 
     return logfile 
 
 def CleanComments(array):
