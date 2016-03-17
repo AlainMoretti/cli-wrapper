@@ -225,14 +225,12 @@ def main():
         # now switch to enable mode if needed       
         if len(args.password[1]) > 0:
             c.sendline('enable')
-            index = c.expect(['assword:',args.prompt,args.timeout])
+            index = c.expect(['assword:',args.prompt])
             if index == 0:
                 if SendPassword(enablepassword, args.prompt, c, args.timeout):
                    print("\n>>> connected to: " + h)
             elif index == 1:
                 print('INFO: enable password not needed for remote host: ' + h)
-            elif index == 2:
-                print('\ntimeout after '+str(args.timeout)+' seconds when trying to send enable password')
                 
         # print internal details of pexpect object when debug option is turned on
         if args.debug:print('\n\nPexpect object details:\n\n'+str(c))
