@@ -121,6 +121,21 @@ Please enter your password:
 <<< gracefully exited from: xrv4.xyz
 ```
 
+###Use a sub procedure to perform custom actions within a connection (look at "skeleton.py" in subs directory)
+```
+user@m32e:~/cli-wrapper$ ./cli.py -f hosts/xrvs -o profiles/sample.enc -s subs.skeleton send_one_comment -v -i
+Please enter your password:
+
+csr1000v-1#
+csr1000v-1#!
+csr1000v-1#!!
+csr1000v-1#!!! kinda useless comment...
+csr1000v-1#!!
+csr1000v-1#!
+csr1000v-1#
+```
+
+
 ###And many other options...
 ```
 user@m32e:~/cli-wrapper$ cli.py -h
