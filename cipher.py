@@ -40,5 +40,6 @@ if action == 'encrypt':
     encrypt_file(key,file)
     print('Encrypt "'+file+'" and save it in "'+file+'.enc"')
 elif action == 'decrypt':
-    decrypt_file(key,file)
-    print('Decrypt "'+file+'"')
+    outfile = raw_input('Name of clear file to be created ? ')
+    decrypt_file(key,file,outfile)
+    print('Decrypt "'+file+'" and save it to "'+outfile+'"')

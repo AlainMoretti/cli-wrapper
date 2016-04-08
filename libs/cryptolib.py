@@ -82,8 +82,14 @@ def decrypt_file(key, in_filename, out_filename=None, chunksize=24*1024):
                 if len(chunk) == 0:
                     break
                 outfile.write(decryptor.decrypt(chunk))
-
             outfile.truncate(origsize)
+            
+        with open(out_filename, 'r') as outfile:
+            datatobetested=outfile.read().replace('\n', '')
+            try:
+                datatobetested.decode('ascii')
+            except UnicodeDecodeError:
+                print "\nWARNING: wrong password or original file contains non ASCII characters\n"
 
 def decrypt_file_to_array(key, in_filename, chunksize=24*1024):
     with open(in_filename, 'rb') as infile:
