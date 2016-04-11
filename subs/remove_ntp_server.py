@@ -21,8 +21,8 @@
 # - see if there are any ntp servers configured and remve them from the configuration
 #
 #we can perform any conditional action inside this block of code
-def remove_ntp_server(args,c):
-    #check if the router has some nt servers configured
+def remove_ntp_server(args,c,h):
+    #check if the router has some NTP servers configured
     c.sendline('show run ntp')
     c.expect(args.prompt)
     #grab and parse the output
