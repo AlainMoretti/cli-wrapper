@@ -47,9 +47,6 @@ def get_env_variables(args,c):
     pprint.pprint(vars(args))
     print('The "c" object:')
     pprint.pprint(vars(c))
-    print('The "h" string:')
-    pprint.pprint(h)
-
 
     
 # the following method is pretty simple and useless: 
