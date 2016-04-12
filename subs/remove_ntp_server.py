@@ -14,14 +14,14 @@
 
 #
 # typical command line to launch this procedure would be : 
-# cli.py -f hosts/routers -o profiles/myloginandpassword.enc -s subs/remove_ntp_server remove_ntp_server
+# cli.py -f hosts/routers -o profiles/myloginandpassword.enc -s subs.remove_ntp_server remove_ntp_server
 #
 # The expected result is :
 # - connect to each router of "routers"
 # - see if there are any ntp servers configured and remve them from the configuration
 #
 #we can perform any conditional action inside this block of code
-def remove_ntp_server(args,c,h):
+def remove_ntp_server(args,c):
     #check if the router has some NTP servers configured
     c.sendline('show run ntp')
     c.expect(args.prompt)

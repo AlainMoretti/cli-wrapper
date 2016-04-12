@@ -204,6 +204,8 @@ def main():
     # main loop through hosts
     for host in listhosts_cleaned:
         h = host.rstrip('\n')
+        # in case we loop through an array, we want the actual remote host to be part of 'args' object
+        if args.array:args.remote = h
         if not args.jumphost:
             c = Connection(
                 args.proto, h, args.port, args.user, password,

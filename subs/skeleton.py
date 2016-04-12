@@ -19,7 +19,6 @@
 # note that we always provide 2 arguments: 
 # - args is the object containing all arguments passed to the script, ie: the actual argparse object
 # - c is the connection, ie: the actual Pexpect object 
-# - h is the actual host we are trying to connect to, which is different from args.remote when looping through a list
 
 # Because you have total control of what you do with output from actions taken by a sub, 
 # it is executed before all other arguments passed to the script (commands, interaction, and so on)
@@ -31,8 +30,8 @@
 # you could try to call the 'does_nothing' method to see if your sub is correctly executed 
 # this does nothing except print the below message
 # typical command line to launch this procedure would be : 
-# cli.py -f hosts/routers -o profiles/myloginandpassword.enc -s subs/skeleton does_nothing
-def does_nothing(args,c,h):
+# cli.py -f hosts/routers -o profiles/myloginandpassword.enc -s subs.skeleton does_nothing
+def does_nothing(args,c):
     print "\n\n>>>>> now entering in a subprocess and execute some additional and custom commands <<<<<<<<<\n\n"
 
 
@@ -40,8 +39,8 @@ def does_nothing(args,c,h):
 # the following method will out the comprehensive content of both 'args' and 'c' objects
 # be careful: your passwords will out in clear text !!
 # typical command line to launch this procedure would be : 
-# cli.py -f hosts/routers -o profiles/myloginandpassword.enc -s subs/skeleton get_env_variables
-def get_env_variables(args,c,h):
+# cli.py -f hosts/routers -o profiles/myloginandpassword.enc -s subs.skeleton get_env_variables
+def get_env_variables(args,c):
     import pprint
     print('here below the variables that you can use inside your custom functions: ')
     print('The "args" object:')
@@ -56,8 +55,8 @@ def get_env_variables(args,c,h):
 # the following method is pretty simple and useless: 
 # it interacts with the actual connection, print a comment, and then return control to the main loop
 # typical command line to launch this procedure would be : 
-# cli.py -f hosts/routers -o profiles/myloginandpassword.enc -s subs/skeleton send_one_comment -v
-def send_one_comment(args,c,h):
+# cli.py -f hosts/routers -o profiles/myloginandpassword.enc -s subs.skeleton send_one_comment -v
+def send_one_comment(args,c):
     c.sendline('!')
     c.expect(args.prompt)
     c.sendline('!!')
