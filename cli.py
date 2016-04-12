@@ -268,7 +268,7 @@ def main():
                 
         # execute sub method
         if args.sub:
-            try:submethod(args,c,h)
+            try:submethod(args,c)
             except (ImportError, AttributeError, NameError) as e:exit(e)
         
         # pass in interact mode, hit escape character to end connection
