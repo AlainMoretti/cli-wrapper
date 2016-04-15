@@ -116,9 +116,13 @@ def main():
            args_override_cleaned = CleanComments(args_override)
            if len(args_override_cleaned) == 0:
                exit('ERROR: wrong password, or file was empty...')
-           # and now merge arguments in initial namespace
-           else:p.parse_args(args_override_cleaned, namespace=args)
-    
+           else:
+               try:
+                   args_override_cleaned[0].decode('ascii')
+                   # and now merge arguments in initial namespace
+                   p.parse_args(args_override_cleaned, namespace=args)
+               except UnicodeDecodeError:exit('ERROR: wrong password...')
+               
     # if debug mode is on, we start with araw output of args
     if args.debug:
         print('debug mode is on')
