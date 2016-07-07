@@ -74,7 +74,7 @@ def main():
     p.add_argument('-o', '--options-override', action='store', type=str, dest='override',
         help='ciphered file containing arguments that override command line options')
     p.add_argument('-p', '--prompt', action='store', type=str, dest='prompt', 
-        help='expected prompt from remote host')
+        help='expected prompt from remote host, this field accepts quoted regex')
     p.add_argument('-po', '--port-number', action='store', type=str, dest='port', metavar='TCP_PORT_NUMBER', 
         help='TCP port number for connection')
     p.add_argument('-s', '--sub-proc', action='store', type=str, dest='sub', nargs=2, metavar=('MODULE', 'METHOD'),
