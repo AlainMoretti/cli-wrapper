@@ -15,6 +15,7 @@
 #
 # typical command line to launch this procedure would be : 
 # cli.py -f hosts/routers -o profiles/myloginandpassword.enc -s subs.modify_acl add_stats_per_entry
+# cli.py -f hosts/routers -o profiles/myloginandpassword.enc -s subs.modify_acl add_deny_statement
 #
 # The expected result is :
 # - connect to each router of "routers"
