@@ -18,27 +18,39 @@
 #you can change any of them to fit your needs without breaking anything !!!
 DEFAULT_PROTOCOL='ssh'
 DEFAULT_SHELL='/bin/bash'
+
 #here below you can define what is the escape character in interaction mode
 #defaults to 'Ctrl - ]' which is the common escape char in telnet
 #if you want a 'Ctrl - C' instead, the code is '\x03'
 ESCAPE_CHARACTER='\x1d'
+
 LOGDIR = 'logs'
+
 # LOGFILE_NAME can be: 
 # CODE            EXAMPLE  
 # RANDOM_STRING   remote-host_BDB0148E53E6.log
 # DATE            remote-host_20160130145907.log
 LOGFILE_NAME='RANDOM_STRING' 
+
 LOGFILE_EXTENSION='.txt'
+
+#here below the default command that will be sent to avoid the '--more--' prompt
 MORE='terminal length 0'
+#'none' is a special value that avoids sending even a <CR>
+# MORE='none' 
+
 PROMPT='\n[^\n]+[>#](\s|)$'
 PASSWORD_PROMPT='(p|P)assword:\s?$'
+
 # here below you can pass arguments to ssh except '-p' and '-l'
 # that are already used by the application itself
 # SSH_BINARY = '/usr/bin/ssh'
 SSH_BINARY = 'ssh'
+
 # here after you can define the SSH command form that you will use
 # valid options are :  
 #    'USER_AT_HOST' eg : ssh username@hostname
 #    'L_OPTION'     eg : ssh -l username hostname
 SSH_COMMAND = 'USER_AT_HOST'
+
 TELNET_BINARY = 'telnet'
