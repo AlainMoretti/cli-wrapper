@@ -134,10 +134,10 @@ csr1000v-1#!!
 csr1000v-1#!
 csr1000v-1#
 ```
-###Use a sub procedure to perform custom actions before the establishment of a connection
-###(look at "second_proxy.py" in subs directory)
-user@m32e:~/cli-wrapper$ ./cli.py -f hosts/xrvs -o profiles/sample.enc -ss subs.second_proxy  -v -i
-
+###Use a sub procedure to perform custom actions before the establishment of a connection (look at "second_proxy.py" in subs directory)
+```
+user@m32e:~/cli-wrapper$ ./cli.py -r host -ss subs.second_proxy transparent_connection_to_2nd_proxy
+```
 
 
 
