@@ -134,6 +134,11 @@ csr1000v-1#!!
 csr1000v-1#!
 csr1000v-1#
 ```
+###Use a sub procedure to perform custom actions before the establishment of a connection
+###(look at "second_proxy.py" in subs directory)
+user@m32e:~/cli-wrapper$ ./cli.py -f hosts/xrvs -o profiles/sample.enc -ss subs.second_proxy  -v -i
+
+
 
 
 ###And many other options...
@@ -179,6 +184,9 @@ optional arguments:
                         TCP port number for connection
   -s MODULE METHOD, --sub-proc MODULE METHOD
                         module and function to execute
+  -ss MODULE METHOD, --presub-proc MODULE METHOD
+                        module and function to execute before connection to
+                        remote device
   -t TIMEOUT, --timeout TIMEOUT
                         max seconds to wait for an answer from remote host
   -u USERNAME, --username-credentials USERNAME
