@@ -240,7 +240,7 @@ def main():
                 continue
         
         # now switch to enable mode if needed       
-        if len(args.password[1]) > 0:
+        if len(enablepassword) > 0:
             c.sendline('enable')
             index = c.expect(['assword:',args.prompt])
             if index == 0:
