@@ -172,7 +172,9 @@ def main():
     if args.password:
         password = args.password[0]
         try:enablepassword = args.password[1]
-        except:args.password.append('')
+        except:
+            args.password.append('')
+            enablepassword = ''
     else:
         password = ''
         enablepassword = '' 
