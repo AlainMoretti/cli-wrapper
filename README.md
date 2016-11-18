@@ -90,7 +90,7 @@ user@m32e:~/cli-wrapper$ cli.py -u username -w password -f hosts/liste_csr1000v 
 <<< gracefully exited from: csr1000v-4
 ```
 
-###Send a batch of commands to a list of hosts, using an encrypted profile for login and passwords
+###Use an encrypted profile to store common parameters (login, passwords etc...)
 ```
 user@m32e:~/cli-wrapper$ cat profiles/sample
 #

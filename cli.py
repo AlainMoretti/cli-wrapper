@@ -78,7 +78,7 @@ def main():
     p.add_argument('-po', '--port-number', action='store', type=str, dest='port', metavar='TCP_PORT_NUMBER', 
         help='TCP port number for connection')
     p.add_argument('-s', '--sub-proc', action='store', type=str, dest='sub', nargs=2, metavar=('MODULE', 'METHOD'),
-        help='module and function to execute')
+        help='module and function to execute after the connection is established')
     p.add_argument('-ss', '--presub-proc', action='store', type=str, dest='presub', nargs=2, metavar=('MODULE', 'METHOD'),
         help='module and function to execute before connection to remote device')
     p.add_argument('-t', '--timeout', action='store', type=int, dest='timeout', 
