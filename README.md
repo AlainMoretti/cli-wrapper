@@ -121,7 +121,7 @@ Please enter your password:
 <<< gracefully exited from: xrv4.xyz
 ```
 
-###Use a sub procedure to perform custom actions within a connection (look at "skeleton.py" in subs directory)
+###Use a sub procedure to perform custom actions within a connection (look at "skeleton.py" example in subs directory)
 ```
 user@m32e:~/cli-wrapper$ ./cli.py -f hosts/xrvs -o profiles/sample.enc -s subs.skeleton send_one_comment -v -i
 Please enter your password:
@@ -134,7 +134,8 @@ csr1000v-1#!!
 csr1000v-1#!
 csr1000v-1#
 ```
-###Use a sub procedure to perform custom actions before the establishment of a connection (look at "second_proxy.py" in subs directory)
+###Use a sub procedure to perform custom actions before the establishment of a connection (look at "second_proxy.py" example in subs directory)
+note : if we don't have a 'jumphost' parameter set, the connection does not exist when this procedure is executed.
 ```
 user@m32e:~/cli-wrapper$ ./cli.py -r host -ss subs.second_proxy transparent_connection_to_2nd_proxy
 ```

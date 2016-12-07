@@ -125,17 +125,14 @@ def main():
                    p.parse_args(args_override_cleaned, namespace=args)
                except UnicodeDecodeError:exit('ERROR: wrong password...')
     
-    #import and run presub procedure if any
+    #import presub procedure if any
     if args.presub:
         import importlib
         try:
             mod = importlib.import_module(args.presub[0])
             presubmethod = getattr(mod, args.presub[1])  
         except ImportError as e:exit(e)
-        # execute presub method
-        try:presubmethod(args,c)
-        except (ImportError, AttributeError, NameError) as e:exit(e)
-               
+        
     # if debug mode is on, we start with araw output of args
     if args.debug:
         print('debug mode is on')
@@ -212,6 +209,16 @@ def main():
         c = Connection(*(args.jumphost + [args.timeout] + [args.verbose]))
         if c == False:exit('ERROR: Cannot connect to jumphost') 
         
+        # execute presub method if any
+        if args.presub and presubmethod:
+            try:presubmethod(args,c)
+            except (ImportError, AttributeError, NameError) as e:exit(e)
+    else:
+        # execute presub method if any and no jumphost (no c object referenced at this point)    
+        if args.presub and presubmethod:
+            try:presubmethod(args)
+            except (ImportError, AttributeError, NameError) as e:exit(e)  
+             
     # import sub procedure if any
     if args.sub:
         import importlib

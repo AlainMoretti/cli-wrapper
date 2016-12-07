@@ -16,9 +16,14 @@
 
 
 # Here below some examples that you could use to build your own subs
-# note that we always provide 2 arguments: 
+# note that we always provide at least 1 argument:  
 # - args is the object containing all arguments passed to the script, ie: the actual argparse object
-# - c is the connection, ie: the actual Pexpect object 
+#
+# !!! WARNING !!!
+# This example is a presub, and the 'c' object, which is the connection, ie: the actual Pexpect object 
+# might not exist at this stage
+# This implies that you must not reference 'c' in below methods if you execute
+# the present module as a 'presub' parameter and you don't have a 'jumphost' parameter set. 
 
 # Because you have total control of what you do with output from actions taken by a sub, 
 # it is executed before all other arguments passed to the script (commands, interaction, and so on)
