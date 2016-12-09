@@ -284,6 +284,7 @@ def main():
                 if args.logfile:
                    try:
                        fout.write('----- '+line+' -----\r\n')
+                       print("\t>>> "+line)
                        fout.write(c.before)
                    except (IOError, OSError):print('WARNING: cannot log output to ' + args.logfile)
         else:
