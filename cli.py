@@ -279,12 +279,12 @@ def main():
             if not args.logfile:c.logfile_read = sys.stdout
             # loop through the commands
             for line in listcmd_cleaned:
+                print("\t>>> "+line)
                 SendCommand(c, line, args.prompt, args.timeout)
                 # if logfile is set, we send a clean output inside the loop
                 if args.logfile:
                    try:
-                       fout.write('----- '+line+' -----\r\n')
-                       print("\t>>> "+line)
+                       fout.write('\n\n----- '+line+' -----\n')
                        fout.write(c.before)
                    except (IOError, OSError):print('WARNING: cannot log output to ' + args.logfile)
         else:
