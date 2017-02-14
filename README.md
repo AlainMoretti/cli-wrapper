@@ -205,7 +205,7 @@ user@m32e:~/cli-wrapper$
 - grab the package from Github using `git clone` for example
 - install it anywhere on your machine
 - read `requirements.txt` for a list of Python modules required by the application
-  you can use `pip install -r requirements.txt` but PyCrypto install will fail (see known problems below)
+  you can use `pip install -r requirements.txt` (see known problems below if pycrypto install fails)
 - modify environment variables stored in `libs/constants.py` if needed
 - keep your setup up to date : `git pull`
 
@@ -241,7 +241,7 @@ Note that the expected prompt from the remote device is a regular expression tha
 Then the way you interact, either manually or automatically, with the remote device is all yours.   
 
 ##Known problems
->- pycrypto install through pip usually works ok but there used to be a bug, the workaround is to install pycrypto from source : https://www.dlitz.net/software/pycrypto/ 
+>- pycrypto install through pip usually works well but there used to be a bug, the workaround is to install pycrypto from source : https://www.dlitz.net/software/pycrypto/ 
 >- sometimes the encrypted profile provided to the "-o" option requires an empty line at the end, 
 >  you can figure that out with debug option "-d", and check if the last parameter is not missing.  
 
