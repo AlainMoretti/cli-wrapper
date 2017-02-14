@@ -73,11 +73,11 @@ def Login(p,protocol,host,port,username,password,prompt,timeout,verbose):
     elif index == 3:
         if SendPassword(password,prompt,p,timeout):
            res = True 
-    elif index ==4:
+    elif index == 4:
         print('\ntimeout after '+str(timeout)+' seconds when trying to '+protocol+' to '+host+':'+port)
         res = False
     elif index == 5:
-        print('\n'+host+' unexpectedly closed the connection')
+        print('\n'+host+' unexpectedly died right after the following output: \n\n'+pexpect.before)
         res = False
     return res
 
