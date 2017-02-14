@@ -77,7 +77,7 @@ def Login(p,protocol,host,port,username,password,prompt,timeout,verbose):
         print('\ntimeout after '+str(timeout)+' seconds when trying to '+protocol+' to '+host+':'+port)
         res = False
     elif index == 5:
-        print('\n'+host+' unexpectedly died right after the following output: \n\n'+pexpect.before)
+        print('\n'+host+' unexpectedly died right after the following output: \n\n'+p.before)
         res = False
     return res
 
