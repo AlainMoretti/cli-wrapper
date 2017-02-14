@@ -241,7 +241,7 @@ Note that the expected prompt from the remote device is a regular expression tha
 Then the way you interact, either manually or automatically, with the remote device is all yours.   
 
 ##Known problems
->- there is a bug with PyCrypto install, more details on the [problem](https://github.com/dlitz/pycrypto/issues/108) and a [workaround solution](https://github.com/tootedom/related/blob/master/provisioning/ansible-playground/README.md)
+>- pycrypto install through pip usually works ok but there used to be a bug, the workaround is to install pycrypto from source : https://www.dlitz.net/software/pycrypto/ 
 >- sometimes the encrypted profile provided to the "-o" option requires an empty line at the end, 
 >  you can figure that out with debug option "-d", and check if the last parameter is not missing.  
 
