@@ -115,7 +115,7 @@ def SendCommand(connection,command,prompt,timeout):
     if index == 0:
         res = True
     elif index == 1:
-        print('\ntimeout after '+str(timeout)+' seconds when trying to send password...')
+        print('\ntimeout after '+str(timeout)+' seconds after sending a command...')
         res = False
     elif index == 2:
         print('\nremote host unexpectedly closed the connection...')
