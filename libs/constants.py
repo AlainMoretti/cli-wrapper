@@ -39,7 +39,12 @@ MORE='terminal length 0'
 #'none' is a special value that avoids sending even a <CR>
 # MORE='none' 
 
-PROMPT='\n[^\n]+[>#](\s|)$'
+#The prmopt here below also matches ANSI colored prompts: 
+PROMPT='(\x1b\[[^m]*m|)[\w\d\-_]+[>#]'
+#If you are sure that you don't need to match colored prompts, you could use this simpler one : 
+#PROMPT='\n[^\n]+[>#](\s|)$'
+
+
 PASSWORD_PROMPT='(p|P)assword:\s?$'
 
 # here below you can pass arguments to ssh except '-p' and '-l'
