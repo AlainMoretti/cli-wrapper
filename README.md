@@ -1,5 +1,5 @@
 # Cli-wrapper 
-##A small project to automate CLI based tasks
+## A small project to automate CLI based tasks
 
 >_Because we think CLI is here to stay, at least for troubleshooting purposes_  
 >_Because we use it on a daily basis_  
@@ -7,8 +7,8 @@
 
 We decided to build this small project using Python [pexpect](https://pexpect.readthedocs.org/en/stable/), [argparse](https://docs.python.org/3/library/argparse.html) and [pycrypto](https://www.dlitz.net/software/pycrypto/) modules. 
 
-##What does cli-wrapper do ? 
-###It automates login and let you interact with a remote device
+## What does cli-wrapper do ? 
+### It automates login and let you interact with a remote device
 ```
 user@m32e:~/cli-wrapper$ cli.py -u username -w password -r csr1000v-1  -x telnet
 
@@ -21,7 +21,7 @@ Connection closed by foreign host.
 user@m32e:~/cli-wrapper$
 ```
 
-###You can switch to Cisco enable mode if you provide a second password
+### You can switch to Cisco enable mode if you provide a second password
 ```
 user@m32e:~/cli-wrapper$ cli.py -u username -w password enablepassword -r csr1000v-1  -x telnet
 
@@ -34,7 +34,7 @@ Connection closed by foreign host.
 user@m32e:~/cli-wrapper$
 ```
 
-###Execute one or several commands on a remote device
+### Execute one or several commands on a remote device
 ```
 user@m32e:~/cli-wrapper$ cli.py -u username -w password -r csr1000v-1 -x telnet -c 'sho ip int brief | inc Gi'
 
@@ -50,7 +50,7 @@ csr1000v-1>
 <<< gracefully exited from: csr1000v-1
 ```
 
-###Send commands output to a log file
+### Send commands output to a log file
 ```
 user@m32e:~/cli-wrapper$ cli.py -u username -w password -r csr1000v-1 -x telnet -c 'sho ip int brief | inc Gi'
   'show ip route' -l
@@ -59,7 +59,7 @@ user@m32e:~/cli-wrapper$ cli.py -u username -w password -r csr1000v-1 -x telnet 
 <<< gracefully exited from: csr1000v-1
 ```
 
-###Send a batch of commands from a file
+### Send a batch of commands from a file
 ```
 user@m32e:~/cli-wrapper$ cat > commands/sample_2
 show ip route
@@ -72,7 +72,7 @@ user@m32e:~/cli-wrapper$ cli.py -u username -w password -r csr1000v-1 -x telnet 
 <<< gracefully exited from: csr1000v-1
 ```
 
-###Send a batch of commands to a list of hosts
+### Send a batch of commands to a list of hosts
 ```
 user@m32e:~/cli-wrapper$ cli.py -u username -w password -f hosts/liste_csr1000v -x telnet -cf commands/sample_
 2 -l
@@ -90,7 +90,7 @@ user@m32e:~/cli-wrapper$ cli.py -u username -w password -f hosts/liste_csr1000v 
 <<< gracefully exited from: csr1000v-4
 ```
 
-###Use an encrypted profile to store common parameters (login, passwords etc...)
+### Use an encrypted profile to store common parameters (login, passwords etc...)
 ```
 user@m32e:~/cli-wrapper$ cat profiles/sample
 #
@@ -121,7 +121,7 @@ Please enter your password:
 <<< gracefully exited from: xrv4.xyz
 ```
 
-###Use a sub procedure to perform custom actions within a connection (look at "skeleton.py" example in subs directory)
+### Use a sub procedure to perform custom actions within a connection (look at "skeleton.py" example in subs directory)
 ```
 user@m32e:~/cli-wrapper$ ./cli.py -f hosts/xrvs -o profiles/sample.enc -s subs.skeleton send_one_comment -v -i
 Please enter your password:
@@ -142,7 +142,7 @@ user@m32e:~/cli-wrapper$ ./cli.py -r host -ss subs.second_proxy transparent_conn
 
 
 
-###And many other options...
+### And many other options...
 ```
 user@m32e:~/cli-wrapper$ cli.py -h
 usage:
@@ -201,7 +201,7 @@ optional arguments:
 user@m32e:~/cli-wrapper$
 ```
 
-##Install
+## Install
 - grab the package from Github using `git clone` for example
 - install it anywhere on your machine
 - read `requirements.txt` for a list of Python modules required by the application
@@ -209,7 +209,7 @@ user@m32e:~/cli-wrapper$
 - modify environment variables stored in `libs/constants.py` if needed
 - keep your setup up to date : `git pull`
 
-##Howto use ?
+## Howto use ?
 - simply execute `cli.py --help` from command line, and follow the guidelines
 - if you want to store your passwords securely, you should : 
   - put them in a plain text file (see "profiles/sample" or "plaintext" files)
@@ -217,7 +217,7 @@ user@m32e:~/cli-wrapper$
   - delete the original plain file
   - from now on, you can use `--override` option to inject your credentials into the program
 
-##Features we have
+## Features we have
 - automation of connection and authentication phases in a secure way
 - provide a list of hosts from which we need the same pieces of infos
 - provide a list of commands to be executed on a remote host
@@ -226,24 +226,24 @@ user@m32e:~/cli-wrapper$
 - storage of common parameters in local ciphered files
 - provide a sub procedure to be customized, so it can execute special actions, depending on interaction with remote host 
 
-##Features that we would need
+## Features that we would need
 - a comprehensive documentation set :-)
 - let the user provide their own parameters that could be reused in sub procedure
 - maybe a testing unit...
 
-##Platforms known to be compatible
+## Platforms known to be compatible
 - Linux Ubuntu, Debian and others for sure but we haven't tested it yet. 
 - Cygwin on Windows
 
-##Remote devices you can log into
+## Remote devices you can log into
 Any piece of equipment offering a decent command line interface.  
 Note that the expected prompt from the remote device is a regular expression that you can change.   
 Then the way you interact, either manually or automatically, with the remote device is all yours.   
 
-##Known problems
+## Known problems
 >- pycrypto install through pip usually works well but there used to be a bug, the workaround is to install pycrypto from source : https://www.dlitz.net/software/pycrypto/ 
 >- sometimes the encrypted profile provided to the "-o" option requires an empty line at the end, 
 >  you can figure that out with debug option "-d", and check if the last parameter is not missing.  
 
-##Rewards
+## Rewards
 - Pexpect and Pcrypto authors and developers
