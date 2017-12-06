@@ -88,7 +88,7 @@ def main():
     p.add_argument('-u', '--username-credentials', action='store', type=str, dest='user', metavar=('USERNAME'),
         help='username to log into remote host')
     p.add_argument('-v', '--verbose', action='store_true', dest='verbose', 
-        help='unhide connection process, usefull for debugging')
+        help='unhide connection process, useful for debugging')
     p.add_argument('-w', '--password', action='store', type=str, dest='password', nargs='+', metavar=('PASSWORD'),
         help='password to log into remote host and optionally an enable password')
     p.add_argument('-x', '--protocol', action='store', type=str, dest='proto', choices=['telnet', 'ssh'],
@@ -312,7 +312,7 @@ def main():
                 c.sendline(args.exitcommand)
                 c.sendline()
                 c.expect(args.jumphost[5])
-            print('\n<<< gracefully exited from: ' + h + '\n')
+            if args.verbose: print('\n<<< gracefully exited from: ' + h + '\n')
         
 if __name__ == '__main__':
     try:
