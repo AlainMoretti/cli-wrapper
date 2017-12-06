@@ -63,6 +63,8 @@ def main():
     
     p.add_argument('-d', '--debug', action='store_true', dest='debug', 
         help='debug mode will out in clear all arguments passed to the script')
+    p.add_argument('-e', '--exitcommand', action='store', type=str, dest='exitcommand', metavar='EXIT_COMMAND',
+        help='command used to exit from a remote host')
     p.add_argument('-i', '--interact', action='store_false', dest='interact', 
         help='do not interact after connection')
     p.add_argument('-j', '--jumphost-credentials', action='store', type=str, dest='jumphost', metavar='LIST', nargs='+',
@@ -94,6 +96,7 @@ def main():
     
     p.set_defaults(
        debug=False,
+       exitcommand=constants.EXIT_COMMAND,
        interact=True,
        logfile=False,
        more=constants.MORE,
@@ -306,7 +309,7 @@ def main():
         else:
             if not args.jumphost:c.close(force=True)
             else:
-                c.sendline('exit')
+                c.sendline(args.exitcommand)
                 c.sendline()
                 c.expect(args.jumphost[5])
             print('\n<<< gracefully exited from: ' + h + '\n')

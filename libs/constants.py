@@ -58,4 +58,8 @@ SSH_BINARY = 'ssh'
 #    'L_OPTION'     eg : ssh -l username hostname
 SSH_COMMAND = 'USER_AT_HOST'
 
+# you can change name or path to telnet executable
 TELNET_BINARY = 'telnet'
+
+# you can customize the command used to exit an interactive session to a host
+EXIT_COMMAND = 'exit'
