@@ -2,6 +2,10 @@
 #you don't need to take care of spaces in this file
 #the only important thing is : "one field per line"
 # 
+#also pay attention to end of line
+#it should be '\n' only, Unix way, not '\r\n'
+#otherwise parameter parsing will fail
+#
 --username-credentials
   myLoginAccount
 --password
