@@ -234,6 +234,7 @@ user@m32e:~/cli-wrapper$
 ## Platforms known to be compatible
 - Linux Ubuntu, Debian and others for sure but we haven't tested it yet. 
 - Cygwin on Windows
+- Mac OS
 
 ## Remote devices you can log into
 Any piece of equipment offering a decent command line interface.  
