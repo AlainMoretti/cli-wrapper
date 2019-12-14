@@ -153,6 +153,8 @@ def main():
            f = open(args.array)
            listhosts = f.read().splitlines()
            listhosts_cleaned = CleanComments(listhosts)
+           #remove leading and trailing unexpected characters
+           listhosts_cleaned = [i.strip() for i in listhosts_cleaned]
            args.interact = False
         except ValueError:
            print("WARNING: cannot open " + args.array + " not a usable file..")  
@@ -166,6 +168,8 @@ def main():
             f = open(args.cmdfile)
             listcmd = f.read().splitlines()
             listcmd_cleaned = CleanComments(listcmd)
+            #remove leading and trailing unexpected characters
+            listcmd_cleaned = [i.strip() for i in listcmd_cleaned]
         except ValueError:
            print("ERROR: cannot open " + args.cmdfile + " not a usable file..")
     elif args.cmd:
@@ -275,7 +279,7 @@ def main():
                print('WARNING; cannot log output because logfile cannot be opened...')
                print "I/O error({0}): {1}".format(e.errno, e.strerror)
     
-        # if commands in args or in a cmdfile, prepare terminal length
+        # if commands in args or in a cmdfile, then prepare terminal length
         if args.cmdfile or args.cmd:
             SendCommand(c, args.more, args.prompt, args.timeout)
             print("\t>>> now executing commands from " + str(listcmd_cleaned) + " on " + h)

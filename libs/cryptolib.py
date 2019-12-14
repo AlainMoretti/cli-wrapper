@@ -103,5 +103,7 @@ def decrypt_file_to_array(key, in_filename, chunksize=24*1024):
                 break
             out += (decryptor.decrypt(chunk))
     array_out = out.split('\n')
-    array_out.pop()
+    #remove leading and trailing unexpected characters
+    array_out = [i.strip() for i in array_out]
+    #array_out.pop()
     return array_out
