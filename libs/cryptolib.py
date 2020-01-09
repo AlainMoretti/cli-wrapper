@@ -89,7 +89,7 @@ def decrypt_file(key, in_filename, out_filename=None, chunksize=24*1024):
             try:
                 datatobetested.decode('ascii')
             except UnicodeDecodeError:
-                print "\nWARNING: wrong password or original file contains non ASCII characters\n"
+                print ("\nWARNING: wrong password or original file contains non ASCII characters\n")
 
 def decrypt_file_to_array(key, in_filename, chunksize=24*1024):
     with open(in_filename, 'rb') as infile:

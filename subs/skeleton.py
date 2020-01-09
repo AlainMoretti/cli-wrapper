@@ -32,7 +32,7 @@
 # typical command line to launch this procedure would be : 
 # cli.py -f hosts/routers -o profiles/myloginandpassword.enc -s subs.skeleton does_nothing
 def does_nothing(args,c):
-    print "\n\n>>>>> now entering in a subprocess and execute some additional and custom commands <<<<<<<<<\n\n"
+    print ("\n\n>>>>> now entering in a subprocess and execute some additional and custom commands <<<<<<<<<\n\n")
 
 
 
@@ -67,7 +67,7 @@ def send_one_comment(args,c):
  
 
 def main():
-    print "\n\n>>>>> this module is used as a parameter to the main program, it does nothing by itself <<<<<<<<<\n\n"
+    print ("\n\n>>>>> this module is used as a parameter to the main program, it does nothing by itself <<<<<<<<<\n\n")
         
 if __name__ == "__main__":
     main()

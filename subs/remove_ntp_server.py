@@ -44,7 +44,7 @@ def remove_ntp_server(args,c):
     c.expect(args.prompt) 
 
 def main():
-    print "\n\n>>>>> this module is used as a parameter of main program, it does nothing by itself <<<<<<<<<\n\n"
+    print ("\n\n>>>>> this module is used as a parameter of main program, it does nothing by itself <<<<<<<<<\n\n")
 
 if __name__ == "__main__":
     main()

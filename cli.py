@@ -277,7 +277,7 @@ def main():
                fout = open(logfile, 'wb')
             except (IOError, OSError) as e:
                print('WARNING; cannot log output because logfile cannot be opened...')
-               print "I/O error({0}): {1}".format(e.errno, e.strerror)
+               print ("I/O error({0}): {1}").format(e.errno, e.strerror)
     
         # if commands in args or in a cmdfile, then prepare terminal length
         if args.cmdfile or args.cmd:
@@ -322,5 +322,5 @@ if __name__ == '__main__':
     try:
         main()
     except KeyboardInterrupt:
-        print '\n!!! program interrupted !!!\n'
+        print ('\n!!! program interrupted !!!\n')
         sys.exit(0)

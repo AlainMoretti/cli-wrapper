@@ -33,8 +33,8 @@ def find_enable_password(args,c):
         need_enable = True
     elif index == 1:
         already_enable = True
-    elif index == 2: print "::"+args.remote+";ERROR\n"
-    elif index == 3: print "::"+args.remote+";TIMEOUT\n"
+    elif index == 2: print ("::"+args.remote+";ERROR\n")
+    elif index == 3: print ("::"+args.remote+";TIMEOUT\n")
     if need_enable:
         password = 'UNKNOWN'
         got_enable = False
@@ -56,12 +56,12 @@ def find_enable_password(args,c):
                got_enable = True
                password = passwords[i]
             i += 1
-        print "::"+args.remote+";"+password+"\n"
-    elif already_enable: print "::"+args.remote+";NONE\n"
+        print ("::"+args.remote+";"+password+"\n")
+    elif already_enable: print ("::"+args.remote+";NONE\n")
 
 
 def main():
-    print "\n\n>>>>> this module is used as a parameter to the main program, it does nothing by itself <<<<<<<<<\n\n"
+    print ("\n\n>>>>> this module is used as a parameter to the main program, it does nothing by itself <<<<<<<<<\n\n")
 
 if __name__ == "__main__":
     main()
