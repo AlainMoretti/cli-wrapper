@@ -40,7 +40,7 @@ def Connection(protocol,host,port,username,password,prompt,timeout,verbose):
     try:cmd = BuildCommand(protocol, host, port, username)
     except ValueError as e:exit(e)
     
-    p = pexpect.spawn(constants.DEFAULT_SHELL,['-c', cmd],timeout=timeout)
+    p = pexpect.spawnu(constants.DEFAULT_SHELL,['-c', cmd],timeout=timeout,encoding='utf-8')
     if verbose is True:p.logfile_read = sys.stderr 
     if Login(p,protocol,host,port,username,password,prompt,timeout,verbose):
         return p
