@@ -291,8 +291,8 @@ def main():
                 # if logfile is set, we send a clean output inside the loop
                 if args.logfile:
                    try:
-                       fout.write('\n\n----- '+line+' -----\n')
-                       fout.write(c.before)
+                       fout.write(b'\n\n----- '+line.encode()+b' -----\n')
+                       fout.write(c.before.encode())
                    except (IOError, OSError):print('WARNING: cannot log output to ' + args.logfile)
         else:
             if args.logfile:
