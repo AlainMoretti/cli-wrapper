@@ -28,6 +28,9 @@ def BuildCommand(protocol,host,port,username):
            else:cmd = constants.SSH_BINARY+' -p '+str(port)+' '+username+'@'+host
        elif constants.SSH_COMMAND == 'L_OPTION':
            cmd = constants.SSH_BINARY+' -p '+str(port)+' -l '+username+' '+host
+       elif constants.SSH_COMMAND == 'NO_USER':
+           if port == '22':cmd = constants.SSH_BINARY+' '+host
+           else:cmd = constants.SSH_BINARY+' -p '+str(port)+' '+host
        else:exit('ERROR: "'+constants.SSH_COMMAND+'" is not a valid option...')
        res = True
     elif protocol == 'telnet':

@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 # Copyright 2016 Netfishers
 # 
@@ -25,7 +25,7 @@ from libs.connection import Connection
 from libs.connection import Login
 from libs.connection import SendCommand
 from libs.connection import SendPassword
-from libs.cryptolib import decrypt_file_to_array
+#from libs.cryptolib import decrypt_file_to_array
 from libs.getpass import getpass
 from libs.utils import BuildLogfile
 from libs.utils import CleanComments
@@ -66,7 +66,7 @@ def main():
     p.add_argument('-e', '--exitcommand', action='store', type=str, dest='exitcommand', metavar='EXIT_COMMAND',
         help='command used to exit from a remote host')
     p.add_argument('-i', '--interact', action='store_false', dest='interact', 
-        help='do not interact after connection')
+        help='human interaction after connection setup')
     p.add_argument('-j', '--jumphost-credentials', action='store', type=str, dest='jumphost', metavar='LIST', nargs='+',
         help='an ordered list: (protocol,host,port,username,password,prompt,timeout,verbose)\nyou can omit latest elements')
     p.add_argument('-l', '--logfile', action='store_true', dest='logfile', 
@@ -97,7 +97,7 @@ def main():
     p.set_defaults(
        debug=False,
        exitcommand=constants.EXIT_COMMAND,
-       interact=True,
+       interact=False,
        logfile=False,
        more=constants.MORE,
        prompt=constants.PROMPT,
@@ -233,7 +233,7 @@ def main():
             mod = importlib.import_module(args.sub[0])
             submethod = getattr(mod, args.sub[1])  
         except ImportError as e:exit(e)
-    
+
     # main loop through hosts
     for host in listhosts_cleaned:
         h = host.rstrip('\n')
@@ -304,7 +304,7 @@ def main():
         if args.sub:
             try:submethod(args,c)
             except (ImportError, AttributeError, NameError) as e:exit(e)
-        
+
         # pass in interact mode, hit escape character to end connection
         if args.interact is True:
             SendCommand(c, '\n', args.prompt, args.timeout)
@@ -317,7 +317,7 @@ def main():
                 c.sendline()
                 c.expect(args.jumphost[5])
             if args.verbose: print('\n<<< gracefully exited from: ' + h + '\n')
-        
+
 if __name__ == '__main__':
     try:
         main()

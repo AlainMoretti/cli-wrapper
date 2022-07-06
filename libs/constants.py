@@ -30,7 +30,7 @@ LOGDIR = 'logs'
 # CODE            EXAMPLE  
 # RANDOM_STRING   remote-host_BDB0148E53E6.log
 # DATE            remote-host_20160130145907.log
-LOGFILE_NAME='RANDOM_STRING' 
+LOGFILE_NAME='DATE'
 
 LOGFILE_EXTENSION='.txt'
 
@@ -56,7 +56,8 @@ SSH_BINARY = 'ssh'
 # valid options are :  
 #    'USER_AT_HOST' eg : ssh username@hostname
 #    'L_OPTION'     eg : ssh -l username hostname
-SSH_COMMAND = 'USER_AT_HOST'
+#    'NO_USER'      eg : ssh hostname
+SSH_COMMAND = 'NO_USER'
 
 # you can change name or path to telnet executable
 TELNET_BINARY = 'telnet'
