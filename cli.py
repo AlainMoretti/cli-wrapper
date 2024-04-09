@@ -65,7 +65,7 @@ def main():
         help='debug mode will out in clear all arguments passed to the script')
     p.add_argument('-e', '--exitcommand', action='store', type=str, dest='exitcommand', metavar='EXIT_COMMAND',
         help='command used to exit from a remote host')
-    p.add_argument('-i', '--interact', action='store_false', dest='interact', 
+    p.add_argument('-i', '--interact', action='store_true', dest='interact', 
         help='human interaction after connection setup')
     p.add_argument('-j', '--jumphost-credentials', action='store', type=str, dest='jumphost', metavar='LIST', nargs='+',
         help='an ordered list: (protocol,host,port,username,password,prompt,timeout,verbose)\nyou can omit latest elements')
@@ -155,7 +155,7 @@ def main():
            listhosts_cleaned = CleanComments(listhosts)
            #remove leading and trailing unexpected characters
            listhosts_cleaned = [i.strip() for i in listhosts_cleaned]
-           args.interact = False
+           #args.interact = False
         except ValueError:
            print("WARNING: cannot open " + args.array + " not a usable file..")  
     if args.debug:
