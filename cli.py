@@ -61,16 +61,18 @@ def main():
     mut_excl_2.add_argument('-cf', '--command-file', action='store', type=str, dest='cmdfile', metavar='COMMAND_FILE',
         help='file containing a list of commands')
     
+    mut_excl_3 = p.add_mutually_exclusive_group()
+    mut_excl_3.add_argument('-i', '--interact', action='store_true', dest='interact',
+        help='human interaction after connection setup')
+    mut_excl_3.add_argument('-l', '--logfile', action='store_true', dest='logfile',
+        help='create a logging file in "logs" subdirectory')
+
     p.add_argument('-d', '--debug', action='store_true', dest='debug', 
         help='debug mode will out in clear all arguments passed to the script')
     p.add_argument('-e', '--exitcommand', action='store', type=str, dest='exitcommand', metavar='EXIT_COMMAND',
         help='command used to exit from a remote host')
-    p.add_argument('-i', '--interact', action='store_true', dest='interact', 
-        help='human interaction after connection setup')
     p.add_argument('-j', '--jumphost-credentials', action='store', type=str, dest='jumphost', metavar='LIST', nargs='+',
         help='an ordered list: (protocol,host,port,username,password,prompt,timeout,verbose)\nyou can omit latest elements')
-    p.add_argument('-l', '--logfile', action='store_true', dest='logfile', 
-        help='create a logging file in "logs" subdirectory')
     p.add_argument('-m', '--no-more', action='store', type=str, dest='more',
         help='command to pass to remote host to avoid --more-- in execution, defaults to "terminal length 0"')
     p.add_argument('-o', '--options-override', action='store', type=str, dest='override',
