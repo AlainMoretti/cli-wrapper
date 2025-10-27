@@ -241,7 +241,5 @@ Any piece of equipment offering a decent command line interface.
 Note that the expected prompt from the remote device is a regular expression that you can change (-p argument).    
 Then the way you interact with the remote device, either manually or automatically, is all yours.   
 
-## Known problems
-
 ## Rewards
 - Pexpect and Pycrypto authors and developers
