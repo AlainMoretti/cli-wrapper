@@ -168,7 +168,7 @@ optional arguments:
                         file containing a list of commands
   -d, --debug           debug mode will out in clear all arguments passed to
                         the script
-  -i, --interact        do not interact after connection
+  -i, --interact        switch to interactive mode after connection
   -j LIST [LIST ...], --jumphost-credentials LIST [LIST ...]
                         an ordered list: (protocol,host,port,username,password
                         ,prompt,timeout,verbose) you can omit latest elements
