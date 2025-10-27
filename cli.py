@@ -310,6 +310,8 @@ def main():
         # pass in interact mode, hit escape character to end connection
         if args.interact is True:
             SendCommand(c, '\n', args.prompt, args.timeout)
+            #avoids the TypeError in interact mode
+            if args.logfile:c.logfile_read = None
             c.interact(constants.ESCAPE_CHARACTER)
             print('\n<<< gracefully exited from: ' + h + '\n')
         else:
