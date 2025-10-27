@@ -129,7 +129,7 @@ Please enter your password:
 csr1000v-1#
 csr1000v-1#!
 csr1000v-1#!!
-csr1000v-1#!!! kinda useless comment...
+csr1000v-1#!!! sample comment...
 csr1000v-1#!!
 csr1000v-1#!
 csr1000v-1#
@@ -238,13 +238,10 @@ user@m32e:~/cli-wrapper$
 
 ## Remote devices you can log into
 Any piece of equipment offering a decent command line interface.  
-Note that the expected prompt from the remote device is a regular expression that you can change.   
+Note that the expected prompt from the remote device is a regular expression that you can change (-p argument).    
 Then the way you interact with the remote device, either manually or automatically, is all yours.   
 
 ## Known problems
->- pycrypto install through pip usually works well but there used to be a bug, the workaround is to install pycrypto from source : https://www.dlitz.net/software/pycrypto/ 
->- sometimes the encrypted profile provided to the "-o" option requires an empty line at the end, 
->  you can figure that out with debug option "-d", and check if the last parameter is not missing.  
 
 ## Rewards
-- Pexpect and Pcrypto authors and developers
+- Pexpect and Pycrypto authors and developers
