@@ -202,10 +202,11 @@ user@m32e:~/cli-wrapper$
 ```
 
 ## Install
+- as an option, install cli-wrapper inside a Python virtualenv to avoid dependancy problems
 - grab the package from Github using `git clone` for example
 - install it anywhere on your machine
 - read `requirements.txt` for a list of Python modules required by the application
-  you can use `pip install -r requirements.txt` (see known problems below if pycrypto install fails)
+  you can use `pip install -r requirements.txt`
 - modify environment variables stored in `libs/constants.py` if needed
 - keep your setup up to date : `git pull`
 
