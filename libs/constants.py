@@ -57,7 +57,7 @@ SSH_BINARY = 'ssh'
 #    'USER_AT_HOST' eg : ssh username@hostname
 #    'L_OPTION'     eg : ssh -l username hostname
 #    'NO_USER'      eg : ssh hostname
-SSH_COMMAND = 'NO_USER'
+SSH_COMMAND = 'USER_AT_HOST'
 
 # you can change name or path to telnet executable
 TELNET_BINARY = 'telnet'

@@ -25,7 +25,7 @@ from libs.connection import Connection
 from libs.connection import Login
 from libs.connection import SendCommand
 from libs.connection import SendPassword
-#from libs.cryptolib import decrypt_file_to_array
+from libs.cryptolib import decrypt_file_to_array
 from libs.getpass import getpass
 from libs.utils import BuildLogfile
 from libs.utils import CleanComments
@@ -117,26 +117,46 @@ def main():
        if not os.path.isfile(args.override):exit('ERROR: Invalid filename: "' + args.override + '"')
        else:
            password = getpass('Please enter your password: ')
-           key = hashlib.sha256(password).digest()
-           try:args_override = decrypt_file_to_array(key, args.override)
-           except ValueError:exit('ERROR: The file ' + args.override + ' does not seem to be encrypted...')
+           # key = hashlib.sha256(password).digest()
+           # try:args_override = decrypt_file_to_array(key, args.override)
+           # except ValueError:exit('ERROR: The file ' + args.override + ' does not seem to be encrypted...')
+           # args_override_cleaned = CleanComments(args_override)
+           # if len(args_override_cleaned) == 0:
+           #     exit('ERROR: wrong password, or file was empty...')
+           # else:
+           #     try:
+           #         args_override_cleaned[0].decode('ascii')
+           #         # and now merge arguments in initial namespace
+           #         p.parse_args(args_override_cleaned, namespace=args)
+           #     except UnicodeDecodeError:exit('ERROR: wrong password...')
+           password_encoded = password.encode('utf-8')
+           key = hashlib.sha256(password_encoded).digest()
+           
+           try:
+               args_override = decrypt_file_to_array(key, args.override)
+           except ValueError:
+               exit('ERROR: The file ' + args.override + ' does not seem to be encrypted...')
            args_override_cleaned = CleanComments(args_override)
            if len(args_override_cleaned) == 0:
                exit('ERROR: wrong password, or file was empty...')
            else:
-               try:
-                   args_override_cleaned[0].decode('ascii')
-                   # and now merge arguments in initial namespace
-                   p.parse_args(args_override_cleaned, namespace=args)
-               except UnicodeDecodeError:exit('ERROR: wrong password...')
-    
-    #import presub procedure if any
-    if args.presub:
-        import importlib
-        try:
-            mod = importlib.import_module(args.presub[0])
-            presubmethod = getattr(mod, args.presub[1])  
-        except ImportError as e:exit(e)
+                try:
+                   # Vérifier que la première ligne est une str valide ASCII
+                    if not isinstance(args_override_cleaned[0], str):
+                        raise UnicodeDecodeError("Premier élément n'est pas une string")
+                    args_override_cleaned[0].encode('ascii')  # Test encodage ASCII
+                    # and now merge arguments in initial namespace
+                    p.parse_args(args_override_cleaned, namespace=args)
+                except (UnicodeDecodeError, UnicodeEncodeError):
+                    exit('ERROR: wrong password or invalid file format...')
+                    
+                    #import presub procedure if any
+                    if args.presub:
+                        import importlib
+                        try:
+                            mod = importlib.import_module(args.presub[0])
+                            presubmethod = getattr(mod, args.presub[1])  
+                        except ImportError as e:exit(e)
         
     # if debug mode is on, we start with araw output of args
     if args.debug:
