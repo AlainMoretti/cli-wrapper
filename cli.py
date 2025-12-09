@@ -330,17 +330,53 @@ def main():
         # pass in interact mode, hit escape character to end connection
         if args.interact is True:
             SendCommand(c, '\n', args.prompt, args.timeout)
-            #avoids the TypeError in interact mode
-            c.logfile_read = None
-            c.interact(constants.ESCAPE_CHARACTER)
+
+            logfile = None
+            fout = None
+            logging_enabled = False
+
+            while True:
+                if logging_enabled and fout is not None:
+                    c.logfile = fout
+                    c.logfile_read = fout
+                    c.logfile_send = None
+                else:
+                    c.logfile = None
+                    c.logfile_read = None
+                    c.logfile_send = None
+
+                c.interact(constants.ESCAPE_CHARACTER)
+
+                choice = input("(cli-wrapper) [l]og on/off, [q]uit, [c]ontinue ? ").strip().lower()
+
+                if choice == 'l':
+                    if fout is None:
+                        # création à la demande
+                        logfile = BuildLogfile(h)
+                        try:
+                            fout = open(logfile, 'wb')
+                            logging_enabled = True
+                            print(">>> logging started for host %s in %s" % (h, logfile))
+                        except (IOError, OSError) as e:
+                            print(">>> cannot open logfile for host %s: %s" % (h, e))
+                            fout = None
+                            logging_enabled = False
+                    else:
+                        # toggle sur fichier existant
+                        logging_enabled = not logging_enabled
+                        state = "ON" if logging_enabled else "OFF"
+                        print(">>> logging is now %s for host %s" % (state, h))
+                    continue
+
+                elif choice == 'c':
+                    continue
+
+                elif choice == 'q':
+                    break
+
             print('\n<<< gracefully exited from: ' + h + '\n')
-        else:
-            if not args.jumphost:c.close(force=True)
-            else:
-                c.sendline(args.exitcommand)
-                c.sendline()
-                c.expect(args.jumphost[5])
-            if args.verbose: print('\n<<< gracefully exited from: ' + h + '\n')
+            if fout is not None:
+                fout.close()
 
 if __name__ == '__main__':
     try:

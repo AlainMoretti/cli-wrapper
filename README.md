@@ -58,6 +58,33 @@ user@m32e:~/cli-wrapper$ cli.py -u username -w password -r csr1000v-1 -x telnet 
 	>>> now executing commands from ['sho ip int brief | inc Gi', 'show ip route'] on csr1000v-1
 <<< gracefully exited from: csr1000v-1
 ```
+You cannot mix --logfile and --interact when you launch a session. 
+However, once an interactive session is established, and you want to capture a specific output, just hit teh escape character (^$ by default) and then you are prompted as follows: 
+
+```
+RP/0/RP0/CPU0:demo-edge-4#
+RP/0/RP0/CPU0:demo-edge-4#(cli-wrapper) [l]og on/off, [q]uit, [c]ontinue ? l
+>>> logging started for host 172.31.2.4 in logs/172.31.2.4_20251209200808.txt
+
+RP/0/RP0/CPU0:demo-edge-4#sho version
+Tue Dec  9 19:08:00.073 UTC
+Cisco IOS XR Software, Version 24.2.2
+Copyright (c) 2013-2024 by Cisco Systems, Inc.
+```
+
+Once you are done with logging, just hit the escape character once again: 
+```
+RP/0/RP0/CPU0:demo-edge-4#sho platform
+Tue Dec  9 19:08:03.734 UTC
+Node              Type                       State             Config state
+--------------------------------------------------------------------------------
+0/0/CPU0          R-IOSXRV9000-LC-C          IOS XR RUN        NSHUT
+0/RP0/CPU0        R-IOSXRV9000-RP-C(Active)  IOS XR RUN        NSHUT
+RP/0/RP0/CPU0:demo-edge-4#(cli-wrapper) [l]og on/off, [q]uit, [c]ontinue ? l
+>>> logging is now OFF for host 172.31.2.4
+
+RP/0/RP0/CPU0:demo-edge-4#
+``
 
 ### Send a batch of commands from a file
 ```
