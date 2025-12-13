@@ -58,8 +58,10 @@ user@m32e:~/cli-wrapper$ cli.py -u username -w password -r csr1000v-1 -x telnet 
 	>>> now executing commands from ['sho ip int brief | inc Gi', 'show ip route'] on csr1000v-1
 <<< gracefully exited from: csr1000v-1
 ```
-You cannot mix --logfile and --interact when you launch a session. 
-However, once an interactive session is established, and you want to capture a specific output, just hit teh escape character (^$ by default) and then you are prompted as follows: 
+
+You cannot mix --logfile and --interact when you launch a new session. 
+However, once an interactive session is established, and you want to capture a specific output, 
+you just hit the escape character (^$ by default) and then you are prompted as follows: 
 
 ```
 RP/0/RP0/CPU0:demo-edge-4#
@@ -84,7 +86,7 @@ RP/0/RP0/CPU0:demo-edge-4#(cli-wrapper) [l]og on/off, [q]uit, [c]ontinue ? l
 >>> logging is now OFF for host 172.31.2.4
 
 RP/0/RP0/CPU0:demo-edge-4#
-``
+```
 
 ### Send a batch of commands from a file
 ```
@@ -101,8 +103,7 @@ user@m32e:~/cli-wrapper$ cli.py -u username -w password -r csr1000v-1 -x telnet 
 
 ### Send a batch of commands to a list of hosts
 ```
-user@m32e:~/cli-wrapper$ cli.py -u username -w password -f hosts/liste_csr1000v -x telnet -cf commands/sample_
-2 -l
+user@m32e:~/cli-wrapper$ cli.py -u username -w password -f hosts/liste_csr1000v -x telnet -cf commands/sample_2 -l
 	>>> now logging output from csr1000v-1 in logs/csr1000v-1_F69181CBB187.log
 	>>> now executing commands from ['show ip route', 'show ip int brief', 'sho logging'] on csr1000v-1
 <<< gracefully exited from: csr1000v-1
@@ -260,7 +261,7 @@ user@m32e:~/cli-wrapper$
 - maybe a testing unit...
 
 ## Platforms known to be compatible
-- Linux Ubuntu, Debian and others for sure but we haven't tested it yet. 
+- Linux Ubuntu, Debian, Redhat and others for sure but I haven't tested all of them. 
 - Cygwin on Windows
 - Mac OS
 
@@ -270,4 +271,4 @@ Note that the expected prompt from the remote device is a regular expression tha
 Then the way you interact with the remote device, either manually or automatically, is all yours.   
 
 ## Rewards
-- Pexpect and Pycrypto authors and developers
+- Pexpect and pycrypto authors and developers
