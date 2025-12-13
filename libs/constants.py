@@ -39,10 +39,11 @@ MORE='terminal length 0'
 #'none' is a special value that avoids sending even a <CR>
 # MORE='none' 
 
-#The prmopt here below also matches ANSI colored prompts: 
-PROMPT='(\x1b\[[^m]*m|)[\w\d\-_]+[>#]'
-#If you are sure that you don't need to match colored prompts, you could use this simpler one : 
-#PROMPT='\n[^\n]+[>#](\s|)$'
+#The following prompt should match any mode on a Cisco device (unpriviledged, enable, config): 
+PROMPT='\n[^\n]+[>#](\s|)$'
+
+#The prompt here below also matches ANSI colored prompts in case you're dealing with NX-OS for example: 
+#PROMPT='(\x1b\[[^m]*m|)[\w\d\-_]+[>#]'
 
 
 PASSWORD_PROMPT='(p|P)assword:\s?$'
