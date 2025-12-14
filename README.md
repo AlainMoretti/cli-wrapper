@@ -271,4 +271,4 @@ Note that the expected prompt from the remote device is a regular expression tha
 Then the way you interact with the remote device, either manually or automatically, is all yours.   
 
 ## Rewards
-- Pexpect and pycrypto authors and developers
+- Pexpect and Pycryptodome authors and developers

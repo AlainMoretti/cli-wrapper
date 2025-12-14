@@ -1,5 +1,4 @@
 getch==1.0
 pexpect==4.9.0
 ptyprocess==0.7.0
-pycrypto==2.6.1
-pycryptodome==3.22.0
+pycryptodome==3.23.0
