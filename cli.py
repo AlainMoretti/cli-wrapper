@@ -117,18 +117,6 @@ def main():
        if not os.path.isfile(args.override):exit('ERROR: Invalid filename: "' + args.override + '"')
        else:
            password = getpass('Please enter your password: ')
-           # key = hashlib.sha256(password).digest()
-           # try:args_override = decrypt_file_to_array(key, args.override)
-           # except ValueError:exit('ERROR: The file ' + args.override + ' does not seem to be encrypted...')
-           # args_override_cleaned = CleanComments(args_override)
-           # if len(args_override_cleaned) == 0:
-           #     exit('ERROR: wrong password, or file was empty...')
-           # else:
-           #     try:
-           #         args_override_cleaned[0].decode('ascii')
-           #         # and now merge arguments in initial namespace
-           #         p.parse_args(args_override_cleaned, namespace=args)
-           #     except UnicodeDecodeError:exit('ERROR: wrong password...')
            password_encoded = password.encode('utf-8')
            key = hashlib.sha256(password_encoded).digest()
            
@@ -329,7 +317,7 @@ def main():
 
         # pass in interact mode, hit escape character to end connection
         if args.interact is True:
-            SendCommand(c, '\n', args.prompt, args.timeout)
+            SendCommand(c, '\n\n\n', args.prompt, args.timeout)
 
             logfile = None
             fout = None
