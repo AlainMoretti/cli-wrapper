@@ -40,13 +40,13 @@ MORE='terminal length 0'
 # MORE='none' 
 
 #The following prompt should match any mode on a Cisco device (unpriviledged, enable, config): 
-PROMPT='\n[^\n]+[>#](\s|)$'
+PROMPT=r"\n[^\n]+[>#](\s|)$"
 
 #The prompt here below also matches ANSI colored prompts in case you're dealing with NX-OS for example: 
 #PROMPT='(\x1b\[[^m]*m|)[\w\d\-_]+[>#]'
 
 
-PASSWORD_PROMPT='(p|P)assword:\s?$'
+PASSWORD_PROMPT=r"(p|P)assword:\s?$"
 
 # here below you can pass arguments to ssh except '-p' and '-l'
 # that are already used by the application itself
