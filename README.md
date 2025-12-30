@@ -233,14 +233,14 @@ user@m32e:~/cli-wrapper$
 - as an option, install cli-wrapper inside a Python virtualenv to avoid dependancy problems
 - grab the package from Github using `git clone` for example
 - install it anywhere on your machine
-- read `requirements.txt` for a list of Python modules required by the application
+- read `requirements.txt` for a list of Python modules required by the application\
   you can use `pip install -r requirements.txt`
 - modify environment variables stored in `libs/constants.py` if needed
 - keep your setup up to date : `git pull`
 
 ## Howto use ?
 - simply execute `cli.py --help` from command line, and follow the guidelines
-- if you want to simply log into a remote device and start an interactive session: 
+- if you want to simply log into a remote device and start an interactive session:\
   `cli.py -i -u LOGIN -w PASSWORD -r REMOTE_HOST`
 - if you want to store your passwords securely, you should : 
   - put them in a plain text file (see "profiles/sample" or "plaintext" files)
