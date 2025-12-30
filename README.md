@@ -10,7 +10,7 @@ We decided to build this small project using Python [pexpect](https://pexpect.re
 ## What does cli-wrapper do ? 
 ### It automates login and let you interact with a remote device
 ```
-user@m32e:~/cli-wrapper$ cli.py -u username -w password -r csr1000v-1  -x telnet
+user@m32e:~/cli-wrapper$ cli.py -i -u username -w password -r csr1000v-1  -x telnet
 
 csr1000v-1>
 csr1000v-1>q
@@ -23,7 +23,7 @@ user@m32e:~/cli-wrapper$
 
 ### You can switch to Cisco enable mode if you provide a second password
 ```
-user@m32e:~/cli-wrapper$ cli.py -u username -w password enablepassword -r csr1000v-1  -x telnet
+user@m32e:~/cli-wrapper$ cli.py -i -u username -w password enablepassword -r csr1000v-1  -x telnet
 
 csr1000v-1#
 csr1000v-1#q
@@ -240,6 +240,8 @@ user@m32e:~/cli-wrapper$
 
 ## Howto use ?
 - simply execute `cli.py --help` from command line, and follow the guidelines
+- if you want to simply log into a remote device and start an interactive session: 
+  `cli.py -i -u LOGIN -w PASSWORD -r REMOTE_HOST`
 - if you want to store your passwords securely, you should : 
   - put them in a plain text file (see "profiles/sample" or "plaintext" files)
   - cipher the file using `cipher.py` utility with a single password
@@ -248,9 +250,9 @@ user@m32e:~/cli-wrapper$
 
 ## Features we have
 - automation of connection and authentication phases in a secure way
-- provide a list of hosts from which we need the same pieces of infos
-- provide a list of commands to be executed on a remote host
-- comprehensive logging capabilities
+- provide a list of hosts and send a command to each one
+- provide a list of commands to be executed on a remote host or a list of remote hosts
+- comprehensive logging capabilities (including logging triggering from an interactive CLI session)
 - possibility to use a jump server (a server that sits in between us and the targeted host)
 - storage of common parameters in local ciphered files
 - provide a sub procedure to be customized, so it can execute special actions, depending on interaction with remote host 
@@ -261,7 +263,7 @@ user@m32e:~/cli-wrapper$
 - maybe a testing unit...
 
 ## Platforms known to be compatible
-- Linux Ubuntu, Debian, Redhat and others for sure but I haven't tested all of them. 
+- Linux Ubuntu, Debian, Fedora, Redhat and others for sure but I haven't tested all of them. 
 - Cygwin on Windows
 - Mac OS
 
