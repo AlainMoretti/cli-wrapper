@@ -318,6 +318,10 @@ def main():
         # pass in interact mode, hit escape character to end connection
         if args.interact is True:
             SendCommand(c, '\n', args.prompt, args.timeout)
+            
+            # Display the current prompt before entering interactive mode
+            sys.stdout.write(c.after.decode() if isinstance(c.after, bytes) else c.after)
+            sys.stdout.flush()
 
             logfile = None
             fout = None
