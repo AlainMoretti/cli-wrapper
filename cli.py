@@ -296,7 +296,7 @@ def main():
             if not args.logfile:c.logfile_read = sys.stdout
             # loop through the commands
             for line in listcmd_cleaned:
-                print("\t>>> "+line)
+                #print("\t>>> "+line)
                 SendCommand(c, line, args.prompt, args.timeout)
                 # if logfile is set, we send a clean output inside the loop
                 if args.logfile:
